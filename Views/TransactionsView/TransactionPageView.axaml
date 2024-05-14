@@ -1,0 +1,39 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:viewModels="clr-namespace:FinanceFuse.ViewModels.TransactionsViewModel"
+			 xmlns:converter="clr-namespace:FinanceFuse.Converter"
+             x:Class="FinanceFuse.Views.TransactionsView.TransactionPageView"
+             x:DataType="viewModels:TransactionPageViewModel">
+
+	<UserControl.Resources>
+		<converter:DateStringConverter x:Key="DateStringConverter" />
+	</UserControl.Resources>
+
+	<TabControl ItemsSource="{Binding TabItems}">
+		<TabControl.Template>
+			<ControlTemplate TargetType="TabControl">
+				<StackPanel>
+					<ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" AllowAutoHide="True" Padding="6,0">
+						<ItemsPresenter Name="PART_ItemsPresenter" ItemsPanel="{TemplateBinding ItemsPanel}"/>
+					</ScrollViewer>
+					<ContentPresenter Name="PART_SelectedContentHost" Margin="{TemplateBinding Padding}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+									  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" Content="{TemplateBinding SelectedContent}" 
+									  ContentTemplate="{TemplateBinding SelectedContentTemplate}" />
+				</StackPanel>
+			</ControlTemplate>
+		</TabControl.Template>
+		<TabControl.ItemTemplate>
+			<DataTemplate>
+				<TextBlock Text="{Binding Header, Converter={StaticResource DateStringConverter}, ConverterParameter='MM/yyyy'}" Width="150"/>
+			</DataTemplate>
+		</TabControl.ItemTemplate>
+		<TabControl.ContentTemplate>
+			<DataTemplate x:DataType="viewModels:TabItem">
+				<ContentControl Content="{Binding TransactionModel}"/>
+			</DataTemplate>
+		</TabControl.ContentTemplate>
+	</TabControl>
+</UserControl>

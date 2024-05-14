@@ -1,0 +1,33 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:FinanceFuse.ViewModels.TransactionsViewModel"
+             xmlns:converter="clr-namespace:FinanceFuse.Converter"
+             xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="FinanceFuse.Views.TransactionsView.TransactionItemView"
+             x:DataType="viewModels:TransactionItemViewModel">
+    <UserControl.Resources>
+        <converter:DateStringConverter x:Key="DateStringConverter" />
+		<converter:PriceConverter x:Key="PriceConverter" />
+    </UserControl.Resources>
+    <ListBox ItemsSource="{Binding Transactions}" SelectionMode="Single">
+		<ListBox.ItemTemplate>
+			<DataTemplate>
+				<controls:Card MinWidth="240" VerticalAlignment="Top" HorizontalAlignment="Stretch"
+							   Margin="4" MaxHeight="180">
+					<Grid ColumnDefinitions="30*,50*,20*">
+						<Button Command="{Binding OnTransactionClicked}"></Button>
+						<Image Source="{Binding Transaction.ImageSource}" Grid.Column="0"/>
+						<StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="20,0,0,0">
+							<TextBlock Text="{Binding Transaction.Description}" FontSize="18" Margin="0,0,0,10"/>
+							<TextBlock Text="{Binding Transaction.Date, Converter={StaticResource DateStringConverter}}" FontSize="18"/>
+						</StackPanel>
+						<TextBlock Text="{Binding Transaction.Price, Converter={StaticResource PriceConverter}}" Grid.Column="2" VerticalAlignment="Center" FontSize="18"/>
+					</Grid>
+				</controls:Card>
+			</DataTemplate>
+		</ListBox.ItemTemplate>
+	</ListBox>
+</UserControl>

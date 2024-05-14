@@ -1,0 +1,86 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\antonio\\Documents\\dotnet\\project\\FinanceFuse\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{AA98D15E-4AE6-4267-A7FD-F5128BA44CA6}|FinanceFuse.csproj|c:\\users\\antonio\\documents\\dotnet\\project\\financefuse\\viewmodels\\mainwindowviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AA98D15E-4AE6-4267-A7FD-F5128BA44CA6}|FinanceFuse.csproj|solutionrelative:viewmodels\\mainwindowviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AA98D15E-4AE6-4267-A7FD-F5128BA44CA6}|FinanceFuse.csproj|c:\\users\\antonio\\documents\\dotnet\\project\\financefuse\\views\\transactionsview\\transactiondetailsview.axaml||{6D5344A2-2FCD-49DE-A09D-6A14FD1B1224}",
+      "RelativeMoniker": "D:0:0:{AA98D15E-4AE6-4267-A7FD-F5128BA44CA6}|FinanceFuse.csproj|solutionrelative:views\\transactionsview\\transactiondetailsview.axaml||{6D5344A2-2FCD-49DE-A09D-6A14FD1B1224}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AA98D15E-4AE6-4267-A7FD-F5128BA44CA6}|FinanceFuse.csproj|c:\\users\\antonio\\documents\\dotnet\\project\\financefuse\\views\\transactionsview\\transactionitemview.axaml||{6D5344A2-2FCD-49DE-A09D-6A14FD1B1224}",
+      "RelativeMoniker": "D:0:0:{AA98D15E-4AE6-4267-A7FD-F5128BA44CA6}|FinanceFuse.csproj|solutionrelative:views\\transactionsview\\transactionitemview.axaml||{6D5344A2-2FCD-49DE-A09D-6A14FD1B1224}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AA98D15E-4AE6-4267-A7FD-F5128BA44CA6}|FinanceFuse.csproj|c:\\users\\antonio\\documents\\dotnet\\project\\financefuse\\viewmodels\\transactionsviewmodel\\transactiondetailsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AA98D15E-4AE6-4267-A7FD-F5128BA44CA6}|FinanceFuse.csproj|solutionrelative:viewmodels\\transactionsviewmodel\\transactiondetailsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainWindowViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\antonio\\Documents\\dotnet\\project\\FinanceFuse\\ViewModels\\MainWindowViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\MainWindowViewModel.cs",
+              "ToolTip": "C:\\Users\\antonio\\Documents\\dotnet\\project\\FinanceFuse\\ViewModels\\MainWindowViewModel.cs",
+              "RelativeToolTip": "ViewModels\\MainWindowViewModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-14T13:49:43.753Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "TransactionDetailsViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\antonio\\Documents\\dotnet\\project\\FinanceFuse\\ViewModels\\TransactionsViewModel\\TransactionDetailsViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\TransactionsViewModel\\TransactionDetailsViewModel.cs",
+              "ToolTip": "C:\\Users\\antonio\\Documents\\dotnet\\project\\FinanceFuse\\ViewModels\\TransactionsViewModel\\TransactionDetailsViewModel.cs",
+              "RelativeToolTip": "ViewModels\\TransactionsViewModel\\TransactionDetailsViewModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAKAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-14T12:26:31.356Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TransactionDetailsView.axaml",
+              "DocumentMoniker": "C:\\Users\\antonio\\Documents\\dotnet\\project\\FinanceFuse\\Views\\TransactionsView\\TransactionDetailsView.axaml",
+              "RelativeDocumentMoniker": "Views\\TransactionsView\\TransactionDetailsView.axaml",
+              "ToolTip": "C:\\Users\\antonio\\Documents\\dotnet\\project\\FinanceFuse\\Views\\TransactionsView\\TransactionDetailsView.axaml",
+              "RelativeToolTip": "Views\\TransactionsView\\TransactionDetailsView.axaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-05-14T12:25:55.698Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "TransactionItemView.axaml",
+              "DocumentMoniker": "C:\\Users\\antonio\\Documents\\dotnet\\project\\FinanceFuse\\Views\\TransactionsView\\TransactionItemView.axaml",
+              "RelativeDocumentMoniker": "Views\\TransactionsView\\TransactionItemView.axaml",
+              "ToolTip": "C:\\Users\\antonio\\Documents\\dotnet\\project\\FinanceFuse\\Views\\TransactionsView\\TransactionItemView.axaml",
+              "RelativeToolTip": "Views\\TransactionsView\\TransactionItemView.axaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-05-09T23:05:02.395Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
