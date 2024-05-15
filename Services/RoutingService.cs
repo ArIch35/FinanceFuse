@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using CommunityToolkit.Mvvm.ComponentModel;
+using FinanceFuse.Interfaces;
 
 namespace FinanceFuse.Services;
 
@@ -34,7 +35,7 @@ public class RoutingService
         return _instance;
     }
 
-    public void AddScreenToStaticScreen(string screenName, ObservableObject screen)
+    public void AddScreenToStaticScreen<T>(string screenName, T screen) where T : ObservableObject, IRoutable
     {
         if (_staticScreens.TryAdd(screenName, screen))
         {
@@ -47,11 +48,15 @@ public class RoutingService
         _changeScreenCallback(newScreen);
     }
     
-    public void ChangeScreen(string staticScreenName)
+    public void ChangeStaticScreen<T>(string staticScreenName, T? item = default) where T: IModelBase
     {
         if (_staticScreens.TryGetValue(staticScreenName, out var screen))
         {
             _changeScreenCallback(screen);
+            if (screen is IRoutable routableScreen && item != null)
+            {
+                routableScreen.OnRouted(item);
+            }
         }
     }
 }

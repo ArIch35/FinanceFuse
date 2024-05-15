@@ -2,15 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FinanceFuse.Services
 {
     public class TransactionService
     {
-        public List<Transaction> Transactions { get; }
-        private static TransactionService _instance ;
+        private List<Transaction> Transactions { get; }
+        private static TransactionService _instance = null!;
         private static readonly  object Locker = new();
 
         private TransactionService()

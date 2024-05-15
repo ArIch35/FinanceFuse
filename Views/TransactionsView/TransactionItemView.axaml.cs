@@ -8,8 +8,4 @@ public partial class TransactionItemView : UserControl
     {
         InitializeComponent();
     }
-
-    private void Binding(object? sender, Avalonia.Input.PointerPressedEventArgs e)
-    {
-    }
 }

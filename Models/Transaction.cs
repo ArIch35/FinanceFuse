@@ -5,10 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FinanceFuse.Interfaces;
 
 namespace FinanceFuse.Models
 {
-    public class Transaction
+    public class Transaction: IModelBase
     {
         public string Id { get; set; }
         public string ImageUrl { get; set; }
@@ -17,7 +18,7 @@ namespace FinanceFuse.Models
         public double Price { get; set; }
         public Bitmap ImageSource
         {
-            get => BitmapReader.ReadBitmapFromStringURI(ImageUrl);
+            get => BitmapReader.ReadBitmapFromStringUri(ImageUrl);
         }
 
         public Transaction()

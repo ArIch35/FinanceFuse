@@ -11,14 +11,15 @@
 	</Design.DataContext>
 	<StackPanel>
 		<ComboBox ItemsSource="{Binding GroupedItemsByYear}" 
-				  SelectedIndex="0"
-				  SelectedItem="{Binding SelectedItem}">
+		          SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+		          >
 			<ComboBox.ItemTemplate>
 				<DataTemplate>
 					<TextBlock Text="{Binding YearHeader}"/>
 				</DataTemplate>
 			</ComboBox.ItemTemplate>
 		</ComboBox>
+		<TextBlock Text="{Binding SelectedItem.YearHeader}"/>
 		<ContentControl Content="{Binding MainContentViewModel}"/>
 	</StackPanel>
 </UserControl>

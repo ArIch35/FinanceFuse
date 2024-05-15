@@ -12,7 +12,7 @@
 		<converter:DateStringConverter x:Key="DateStringConverter" />
 	</UserControl.Resources>
 
-	<TabControl ItemsSource="{Binding TabItems}">
+	<TabControl ItemsSource="{Binding TabItems}" SelectedItem="{Binding SelectedItem}">
 		<TabControl.Template>
 			<ControlTemplate TargetType="TabControl">
 				<StackPanel>

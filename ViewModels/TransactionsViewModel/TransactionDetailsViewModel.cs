@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using FinanceFuse.Models;
 using FinanceFuse.Services;
 
@@ -16,7 +11,7 @@ namespace FinanceFuse.ViewModels.TransactionsViewModel
 
         public void BackToHome()
         {
-            Router.ChangeScreen("TransactionSelectorViewModel");
+            Router.ChangeStaticScreen("TransactionSelectorViewModel", transaction);
         }
     }
 }

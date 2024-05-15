@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Avalonia;
-using Avalonia.Controls;
+﻿using System.Collections.Generic;
 using CommunityToolkit.Mvvm.ComponentModel;
 using FinanceFuse.Models;
 using FinanceFuse.Services;

@@ -1,12 +1,7 @@
-﻿using Avalonia.Controls;
-using CommunityToolkit.Mvvm.ComponentModel;
-using FinanceFuse.Services;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FinanceFuse.ViewModels.TransactionsViewModel
 {
@@ -18,5 +13,17 @@ namespace FinanceFuse.ViewModels.TransactionsViewModel
     public class TransactionPageViewModel(List<TabItem> items) : ObservableObject
     {
         public List<TabItem> TabItems { get; } = items;
+        
+        private TabItem _selectedItem = null!;
+        public TabItem SelectedItem
+        {
+            get => _selectedItem;
+            set => SetProperty(ref _selectedItem, value);
+        }
+        
+        public void ChangeTab(int month)
+        {
+            SelectedItem = TabItems.First(item => item.Header.Date.Month == month);
+        }
     }
 }
