@@ -10,10 +10,10 @@ namespace FinanceFuse.Services
     public class TransactionService
     {
         public List<Transaction> Transactions { get; }
-        private static TransactionService _instance = null!;
-        private readonly static object Locker = new();
+        private static TransactionService _instance ;
+        private static readonly  object Locker = new();
 
-        protected TransactionService()
+        private TransactionService()
         {
             Transactions = InitRandomData();
         }

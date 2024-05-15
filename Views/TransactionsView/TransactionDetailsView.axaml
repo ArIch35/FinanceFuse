@@ -6,5 +6,8 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="FinanceFuse.Views.TransactionsView.TransactionDetailsView"
 			 x:DataType="viewModels:TransactionDetailsViewModel">
-  Welcome to Avalonia!
+  <StackPanel>
+	  <Button Command="{Binding BackToHome}"></Button>
+	  <TextBox Text="{Binding Transaction.Description, Mode=TwoWay}"></TextBox>
+  </StackPanel>
 </UserControl>

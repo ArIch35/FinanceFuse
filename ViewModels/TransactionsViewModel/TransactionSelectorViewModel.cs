@@ -19,9 +19,8 @@ namespace FinanceFuse.ViewModels.TransactionsViewModel
     {
         [ObservableProperty] private ObservableObject _mainContentViewModel;
         private readonly TransactionService _transactionService = TransactionService.GetInstance();
+        private static readonly RoutingService Router = RoutingService.GetInstance();
         public List<SelectorItem> GroupedItemsByYear => GenerateGroupedItemsByYear(_transactionService);
-
-        
         private SelectorItem _selectedItem;
         public SelectorItem SelectedItem
         {
@@ -33,10 +32,11 @@ namespace FinanceFuse.ViewModels.TransactionsViewModel
             }
         }
 
-        public TransactionSelectorViewModel() 
+        public TransactionSelectorViewModel()
         {
             SelectedItem = _selectedItem = GroupedItemsByYear.FirstOrDefault()!;
             MainContentViewModel = SelectedItem.TransactionPageModel;
+            Router.AddScreenToStaticScreen("TransactionSelectorViewModel", this);
         }
         private static List<SelectorItem> GenerateGroupedItemsByYear(TransactionService service)
         {

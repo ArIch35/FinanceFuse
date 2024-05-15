@@ -10,10 +10,10 @@ namespace FinanceFuse.ViewModels.TransactionsViewModel
 {
     public class TransactionItem(Transaction transaction): ObservableObject
     {
-        public Transaction Transaction { get; set; } = transaction;
+        public Transaction Transaction { get; } = transaction;
         public void OnTransactionClicked()
         {
-            
+            RoutingService.ChangeScreen(new TransactionDetailsViewModel(Transaction));
         }
     }
     public class TransactionItemViewModel(List<TransactionItem> transactions) : ObservableObject

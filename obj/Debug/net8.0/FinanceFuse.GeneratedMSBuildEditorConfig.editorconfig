@@ -13,24 +13,24 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = FinanceFuse
-build_property.ProjectDir = C:\Users\antonio\Documents\dotnet\project\FinanceFuse\
+build_property.ProjectDir = C:\Users\rog\Documents\dotnet\project\FinanceFuse\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 
-[C:/Users/antonio/Documents/dotnet/project/FinanceFuse/App.axaml]
+[C:/Users/rog/Documents/dotnet/project/FinanceFuse/App.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/antonio/Documents/dotnet/project/FinanceFuse/Views/MainWindow.axaml]
+[C:/Users/rog/Documents/dotnet/project/FinanceFuse/Views/MainWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/antonio/Documents/dotnet/project/FinanceFuse/Views/TransactionsView/TransactionDetailsView.axaml]
+[C:/Users/rog/Documents/dotnet/project/FinanceFuse/Views/TransactionsView/TransactionDetailsView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/antonio/Documents/dotnet/project/FinanceFuse/Views/TransactionsView/TransactionItemView.axaml]
+[C:/Users/rog/Documents/dotnet/project/FinanceFuse/Views/TransactionsView/TransactionItemView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/antonio/Documents/dotnet/project/FinanceFuse/Views/TransactionsView/TransactionPageView.axaml]
+[C:/Users/rog/Documents/dotnet/project/FinanceFuse/Views/TransactionsView/TransactionPageView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/antonio/Documents/dotnet/project/FinanceFuse/Views/TransactionsView/TransactionSelectorView.axaml]
+[C:/Users/rog/Documents/dotnet/project/FinanceFuse/Views/TransactionsView/TransactionSelectorView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
