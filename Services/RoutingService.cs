@@ -22,9 +22,9 @@ public class RoutingService
         _changeScreenCallback ??= callback;
     }
     
-    public static RoutingService GetInstance(Action<ObservableObject>? changeScreenCallback = null)
+    public static RoutingService GetInstance()
     {
-        if (_instance != null)
+        if (_instance != null!)
             return _instance;
 
         lock (Locker)

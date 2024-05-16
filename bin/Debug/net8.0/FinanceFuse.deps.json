@@ -18,10 +18,19 @@
           "DialogHost.Avalonia": "0.7.7",
           "Material.Avalonia": "3.4.2",
           "Material.Avalonia.Dialogs": "3.4.2",
-          "Material.Icons.Avalonia": "2.1.0"
+          "Material.Icons.Avalonia": "2.1.0",
+          "NCalcSync": "3.13.0"
         },
         "runtime": {
           "FinanceFuse.dll": {}
+        }
+      },
+      "Antlr4.Runtime.Standard/4.13.1": {
+        "runtime": {
+          "lib/netstandard2.0/Antlr4.Runtime.Standard.dll": {
+            "assemblyVersion": "4.13.1.0",
+            "fileVersion": "4.13.1.0"
+          }
         }
       },
       "Avalonia/11.0.10": {
@@ -666,6 +675,17 @@
       },
       "Microsoft.NETCore.Platforms/2.1.2": {},
       "Microsoft.NETCore.Targets/1.1.0": {},
+      "NCalcSync/3.13.0": {
+        "dependencies": {
+          "Antlr4.Runtime.Standard": "4.13.1"
+        },
+        "runtime": {
+          "lib/net8.0/NCalc.dll": {
+            "assemblyVersion": "3.13.0.0",
+            "fileVersion": "3.13.0.12"
+          }
+        }
+      },
       "SkiaSharp/2.88.7": {
         "dependencies": {
           "SkiaSharp.NativeAssets.Win32": "2.88.7",
@@ -982,6 +1002,13 @@
       "serviceable": false,
       "sha512": ""
     },
+    "Antlr4.Runtime.Standard/4.13.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Da5+i4kFHUseJRZGcBG5fmZGpA/Ns180ibrQMxgZzjpQOnENVvSL5gi5HZ8Ncz8/AR2WsKbOg2lMBzjz0HUQcA==",
+      "path": "antlr4.runtime.standard/4.13.1",
+      "hashPath": "antlr4.runtime.standard.4.13.1.nupkg.sha512"
+    },
     "Avalonia/11.0.10": {
       "type": "package",
       "serviceable": true,
@@ -1240,6 +1267,13 @@
       "sha512": "sha512-aOZA3BWfz9RXjpzt0sRJJMjAscAUm3Hoa4UWAfceV9UTYxgwZ1lZt5nO2myFf+/jetYQo4uTP7zS8sJY67BBxg==",
       "path": "microsoft.netcore.targets/1.1.0",
       "hashPath": "microsoft.netcore.targets.1.1.0.nupkg.sha512"
+    },
+    "NCalcSync/3.13.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-eF7SmLRsL0YHAGXXUUWX8TSFQpX12Xd7RLtWi00o4hLjFG+OkcuRubvE12Ee5DDaJscYzricy6uYim9HO/vOCg==",
+      "path": "ncalcsync/3.13.0",
+      "hashPath": "ncalcsync.3.13.0.nupkg.sha512"
     },
     "SkiaSharp/2.88.7": {
       "type": "package",

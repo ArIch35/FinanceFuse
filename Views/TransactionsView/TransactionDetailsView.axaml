@@ -2,12 +2,33 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-			 xmlns:viewModels="clr-namespace:FinanceFuse.ViewModels.TransactionsViewModel"
+             xmlns:viewModels="clr-namespace:FinanceFuse.ViewModels.TransactionsViewModel"
+             xmlns:behaviors="clr-namespace:FinanceFuse.Behaviors"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="FinanceFuse.Views.TransactionsView.TransactionDetailsView"
-			 x:DataType="viewModels:TransactionDetailsViewModel">
-  <StackPanel>
-	  <Button Command="{Binding BackToHome}"></Button>
-	  <TextBox Text="{Binding Transaction.Description, Mode=TwoWay}"></TextBox>
-  </StackPanel>
+             x:DataType="viewModels:TransactionDetailsViewModel">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Button Command="{Binding BackToHome}" Grid.Column="0">Back</Button>
+
+        <StackPanel Grid.Column="1">
+            <StackPanel Orientation="Horizontal" Margin="20">
+                <Image Source="../../Assets/Transactions/description-icon.png" Width="50" Height="50" Margin="0 0 20 0"></Image>
+                <TextBox FontSize="22" Text="{Binding Transaction.Description, Mode=TwoWay}" Margin="5 0 0 0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="20">
+                <Image Source="../../Assets/Transactions/money-icon.png" Width="50" Height="50" Margin="0 0 20 0"
+                       behaviors:ClickableBehavior.Command="{Binding ParseExpression}"/>
+                <TextBox FontSize="22" Text="{Binding PriceString, Mode=TwoWay}" Margin="5 0 0 0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="20">
+                <Image Source="../../Assets/Transactions/date-icon.jpg" Width="50" Height="50" Margin="0 0 20 0"></Image>
+                <DatePicker SelectedDate="{Binding Date, Mode=TwoWay}"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
 </UserControl>

@@ -410,3 +410,5 @@ C:\Users\rog\Documents\dotnet\project\FinanceFuse\obj\Debug\net8.0\FinanceFuse.p
 C:\Users\rog\Documents\dotnet\project\FinanceFuse\obj\Debug\net8.0\FinanceF.66F2FD63.Up2Date
 C:\Users\rog\Documents\dotnet\project\FinanceFuse\obj\Debug\net8.0\FinanceFuse.genruntimeconfig.cache
 C:\Users\rog\Documents\dotnet\project\FinanceFuse\obj\Debug\net8.0\ref\FinanceFuse.dll
+C:\Users\rog\Documents\dotnet\project\FinanceFuse\bin\Debug\net8.0\Antlr4.Runtime.Standard.dll
+C:\Users\rog\Documents\dotnet\project\FinanceFuse\bin\Debug\net8.0\NCalc.dll

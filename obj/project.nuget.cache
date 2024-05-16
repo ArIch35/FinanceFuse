@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "6t4rZc9ndA0ybE/uMcLBRygmgEz+0OIr4sMBlITgOPZy6JQWsZGae+SwEflw4O27pY4amPikEnTkoSDBd3lWOA==",
+  "dgSpecHash": "o31qp/e7T9m6dKZqJvlvfLUWeL5MfvAgZ067Na3eYds1/Y0ZSGGY5N6Sxj6UgACAUYgGWj9QFBe5cURz7oS/wA==",
   "success": true,
   "projectFilePath": "C:\\Users\\rog\\Documents\\dotnet\\project\\FinanceFuse\\FinanceFuse.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\rog\\.nuget\\packages\\antlr4.runtime.standard\\4.13.1\\antlr4.runtime.standard.4.13.1.nupkg.sha512",
     "C:\\Users\\rog\\.nuget\\packages\\avalonia\\11.0.10\\avalonia.11.0.10.nupkg.sha512",
     "C:\\Users\\rog\\.nuget\\packages\\avalonia.angle.windows.natives\\2.1.0.2023020321\\avalonia.angle.windows.natives.2.1.0.2023020321.nupkg.sha512",
     "C:\\Users\\rog\\.nuget\\packages\\avalonia.buildservices\\0.0.29\\avalonia.buildservices.0.0.29.nupkg.sha512",
@@ -41,6 +42,7 @@
     "C:\\Users\\rog\\.nuget\\packages\\microsoft.csharp\\4.3.0\\microsoft.csharp.4.3.0.nupkg.sha512",
     "C:\\Users\\rog\\.nuget\\packages\\microsoft.netcore.platforms\\2.1.2\\microsoft.netcore.platforms.2.1.2.nupkg.sha512",
     "C:\\Users\\rog\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
+    "C:\\Users\\rog\\.nuget\\packages\\ncalcsync\\3.13.0\\ncalcsync.3.13.0.nupkg.sha512",
     "C:\\Users\\rog\\.nuget\\packages\\skiasharp\\2.88.7\\skiasharp.2.88.7.nupkg.sha512",
     "C:\\Users\\rog\\.nuget\\packages\\skiasharp.nativeassets.linux\\2.88.7\\skiasharp.nativeassets.linux.2.88.7.nupkg.sha512",
     "C:\\Users\\rog\\.nuget\\packages\\skiasharp.nativeassets.macos\\2.88.7\\skiasharp.nativeassets.macos.2.88.7.nupkg.sha512",

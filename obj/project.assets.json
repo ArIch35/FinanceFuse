@@ -2,6 +2,19 @@
   "version": 3,
   "targets": {
     "net8.0": {
+      "Antlr4.Runtime.Standard/4.13.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Antlr4.Runtime.Standard.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Antlr4.Runtime.Standard.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Avalonia/11.0.10": {
         "type": "package",
         "dependencies": {
@@ -835,6 +848,18 @@
           "lib/netstandard1.0/_._": {}
         }
       },
+      "NCalcSync/3.13.0": {
+        "type": "package",
+        "dependencies": {
+          "Antlr4.Runtime.Standard": "4.13.1"
+        },
+        "compile": {
+          "lib/net8.0/NCalc.dll": {}
+        },
+        "runtime": {
+          "lib/net8.0/NCalc.dll": {}
+        }
+      },
       "SkiaSharp/2.88.7": {
         "type": "package",
         "dependencies": {
@@ -1437,6 +1462,21 @@
     }
   },
   "libraries": {
+    "Antlr4.Runtime.Standard/4.13.1": {
+      "sha512": "Da5+i4kFHUseJRZGcBG5fmZGpA/Ns180ibrQMxgZzjpQOnENVvSL5gi5HZ8Ncz8/AR2WsKbOg2lMBzjz0HUQcA==",
+      "type": "package",
+      "path": "antlr4.runtime.standard/4.13.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "antlr4.runtime.standard.4.13.1.nupkg.sha512",
+        "antlr4.runtime.standard.nuspec",
+        "lib/net45/Antlr4.Runtime.Standard.dll",
+        "lib/net45/Antlr4.Runtime.Standard.xml",
+        "lib/netstandard2.0/Antlr4.Runtime.Standard.dll",
+        "lib/netstandard2.0/Antlr4.Runtime.Standard.xml"
+      ]
+    },
     "Avalonia/11.0.10": {
       "sha512": "EH1FyD1SA7G/TfLmb7JKQlZiOBqr6VzttJMtA5Hnc/c1623zJej0PRuQlqn8Ad6qWKorrKEypBGA9Gye3uWDrA==",
       "type": "package",
@@ -2548,6 +2588,23 @@
         "microsoft.netcore.targets.1.1.0.nupkg.sha512",
         "microsoft.netcore.targets.nuspec",
         "runtime.json"
+      ]
+    },
+    "NCalcSync/3.13.0": {
+      "sha512": "eF7SmLRsL0YHAGXXUUWX8TSFQpX12Xd7RLtWi00o4hLjFG+OkcuRubvE12Ee5DDaJscYzricy6uYim9HO/vOCg==",
+      "type": "package",
+      "path": "ncalcsync/3.13.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "NCalc.png",
+        "README.md",
+        "lib/net461/NCalc.dll",
+        "lib/net6.0/NCalc.dll",
+        "lib/net8.0/NCalc.dll",
+        "lib/netstandard2.0/NCalc.dll",
+        "ncalcsync.3.13.0.nupkg.sha512",
+        "ncalcsync.nuspec"
       ]
     },
     "SkiaSharp/2.88.7": {
@@ -4640,7 +4697,8 @@
       "DialogHost.Avalonia >= 0.7.7",
       "Material.Avalonia >= 3.4.2",
       "Material.Avalonia.Dialogs >= 3.4.2",
-      "Material.Icons.Avalonia >= 2.1.0"
+      "Material.Icons.Avalonia >= 2.1.0",
+      "NCalcSync >= 3.13.0"
     ]
   },
   "packageFolders": {
@@ -4723,6 +4781,10 @@
           "Material.Icons.Avalonia": {
             "target": "Package",
             "version": "[2.1.0, )"
+          },
+          "NCalcSync": {
+            "target": "Package",
+            "version": "[3.13.0, )"
           }
         },
         "imports": [

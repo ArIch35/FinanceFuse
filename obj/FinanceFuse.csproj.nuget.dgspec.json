@@ -81,6 +81,10 @@
             "Material.Icons.Avalonia": {
               "target": "Package",
               "version": "[2.1.0, )"
+            },
+            "NCalcSync": {
+              "target": "Package",
+              "version": "[3.13.0, )"
             }
           },
           "imports": [
