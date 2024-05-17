@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using CommunityToolkit.Mvvm.ComponentModel;
 using FinanceFuse.Interfaces;
+using FinanceFuse.Models;
 
 namespace FinanceFuse.Services;
 
@@ -35,7 +36,7 @@ public class RoutingService
         return _instance;
     }
 
-    public void AddScreenToStaticScreen<T>(string screenName, T screen) where T : ObservableObject, IRoutable
+    public void AddScreenToStaticScreen<T>(string screenName, T screen) where T : RoutableObservableBase
     {
         if (_staticScreens.TryAdd(screenName, screen))
         {
@@ -43,20 +44,44 @@ public class RoutingService
         }
         _staticScreens.Add(screenName, screen);
     }
-    public static void ChangeScreen(ObservableObject newScreen)
+    
+    public static void ChangeScreen<TTarget>(TTarget newScreen) 
+        where TTarget: ObservableObject, IRoutable 
     {
         _changeScreenCallback(newScreen);
     }
+    public static void ChangeScreen<TTarget, TItem>(TTarget newScreen, TItem? item = default) 
+        where TTarget: RoutableObservableBase
+        where TItem: IModelBase
+    {
+        _changeScreenCallback(newScreen);
+        newScreen.OnRouted<TItem, TTarget>(item);
+    }
+    public static void ChangeScreen<TSource, TTarget, TItem>(TTarget newScreen, TItem? item = default, TSource? currentScreenRef = default) 
+        where TSource: RoutableObservableBase
+        where TTarget: RoutableObservableBase
+        where TItem: IModelBase
+    {
+        _changeScreenCallback(newScreen);
+        newScreen.OnRouted(item, currentScreenRef);
+    }
     
-    public void ChangeStaticScreen<T>(string staticScreenName, T? item = default) where T: IModelBase
+    public void ChangeStaticScreen<TScreen, TItem>(string staticScreenName, TItem? item = default, TScreen? currentScreenRef = default) 
+        where TScreen: RoutableObservableBase
+        where TItem: IModelBase
     {
         if (_staticScreens.TryGetValue(staticScreenName, out var screen))
         {
             _changeScreenCallback(screen);
             if (screen is IRoutable routableScreen && item != null)
             {
-                routableScreen.OnRouted(item);
+                routableScreen.OnRouted(item, currentScreenRef);
             }
         }
+    }
+
+    public bool CheckStaticScreenExist(string name)
+    {
+        return _staticScreens.ContainsKey(name);
     }
 }
