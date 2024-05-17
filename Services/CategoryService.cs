@@ -3,51 +3,36 @@ using FinanceFuse.Models;
 
 namespace FinanceFuse.Services;
 
-public class CategoryService
+public static class CategoryService
 {
-    public static readonly Category NoCategory =
-        new Category("0", CategoryType.None, "No Category", "Assets/Categories/no-category-icon.png");
-        public List<Category> Categories { get; }
-        private static CategoryService _instance = null!;
-        private static readonly  object Locker = new();
+    public static readonly Category NoCategory = new("0", CategoryType.None, "No Category", "Assets/Categories/no-category-icon.png");
+    public static List<Category> Categories { get; }
 
-        private CategoryService()
-        {
-            Categories = InitCategories();
-        }
-        
-        public static CategoryService GetInstance()
-        {
-            if (_instance != null!)
-                return _instance;
-
-            lock (Locker)
-            {
-                _instance ??= new CategoryService();
-            }
-
-            return _instance;
-        }
-
-        private static List<Category> InitCategories()
-        {
-            return new List<Category>()
-            {
-                new Category("1", CategoryType.Expense, "Bills & Utilities", "Assets/Categories/Bills/bills-icon.png")
-                {
-                    SubCategories = new List<Category>()
-                    {
-                        new Category("2", CategoryType.Expense, "Electric Bills", "Assets/Categories/Bills/electric-bills-icon.png"),
-                        new Category("3", CategoryType.Expense, "Gas Bills", "Assets/Categories/Bills/gas-bills-icon.png"),
-                    }
-                },
-                new Category("4", CategoryType.Expense, "Education", "Assets/Categories/Education/education-icon.png")
-                {
-                    SubCategories = new List<Category>()
-                    {
-                        new Category("5", CategoryType.Expense, "College Fee", "Assets/Categories/Education/college-fee-icon.png")
-                    }
-                }
-            };
-        }
+    static CategoryService()
+    {
+        Categories = InitCategories();
     }
+
+    private static List<Category> InitCategories()
+    {
+        return new List<Category>()
+        {
+            new("1", CategoryType.Expense, "Bills & Utilities", "Assets/Categories/Bills/bills-icon.png")
+            {
+                SubCategories = new List<Category>()
+                {
+                    new("2", CategoryType.Expense, "Electric Bills", "Assets/Categories/Bills/electric-bills-icon.png"),
+                    new("3", CategoryType.Expense, "Gas Bills", "Assets/Categories/Bills/gas-bills-icon.png"),
+                }
+            },
+            new("4", CategoryType.Expense, "Education", "Assets/Categories/Education/education-icon.png")
+            {
+                SubCategories = new List<Category>()
+                {
+                    new("5", CategoryType.Expense, "College Fee", "Assets/Categories/Education/college-fee-icon.png")
+                }
+            },
+            new("5", CategoryType.Income, "Salary", "Assets/Categories/Income/salary-icon.png")
+        };
+    }
+}

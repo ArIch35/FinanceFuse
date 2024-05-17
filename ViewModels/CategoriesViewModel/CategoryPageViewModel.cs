@@ -6,22 +6,37 @@ using FinanceFuse.Services;
 using FinanceFuse.ViewModels.TransactionsViewModel;
 
 namespace FinanceFuse.ViewModels.CategoriesViewModel;
+public class CategoryTabItems(string header, List<CategoryItemViewModel> categoryItems)
+{
+    public string Header { get; init; } = header;
+    public List<CategoryItemViewModel> CategoryItems { get; init; } = categoryItems;
+}
 
 public class CategoryPageViewModel: RoutableObservableBase
 {
-    private static readonly CategoryService CategoryService = CategoryService.GetInstance();
     private RoutableObservableBase _senderTransactionDetailRef = null!;
-    public List<CategoryItemViewModel> CategoryItems { get; }
+    public List<CategoryTabItems> CategoryTabItems { get; }
+    
+    private CategoryTabItems _selectedItem = null!;
+    public CategoryTabItems SelectedItem
+    {
+        get => _selectedItem;
+        set => SetProperty(ref _selectedItem, value);
+    }
 
     public CategoryPageViewModel()
     {
-        CategoryItems = GetCategoryItemViewModels(CategoryService);
-        RoutingService.GetInstance().AddScreenToStaticScreen("CategoryPageViewModel", this);
+        CategoryTabItems = GetCategoryItemViewModels();
+        RoutingService.AddScreenToStaticScreen("CategoryPageViewModel", this);
     }
 
-    private List<CategoryItemViewModel> GetCategoryItemViewModels(CategoryService service)
+    private List<CategoryTabItems> GetCategoryItemViewModels()
     {
-        return service.Categories.Select(category => new CategoryItemViewModel(category, OnCategoryClicked)).ToList();
+        return CategoryService.Categories.GroupBy(category => category.Type)
+            .Select(grouped => 
+                new CategoryTabItems(grouped.Key.ToString(), grouped.Select(category => 
+                    new CategoryItemViewModel(category, OnCategoryClicked)).ToList()))
+            .ToList();
     }
 
     private void OnCategoryClicked(Category category)
@@ -36,5 +51,4 @@ public class CategoryPageViewModel: RoutableObservableBase
             _senderTransactionDetailRef = transactionDetailsViewModel;
         }
     }
-
 }

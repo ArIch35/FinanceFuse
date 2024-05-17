@@ -13,7 +13,6 @@ namespace FinanceFuse.ViewModels.TransactionsViewModel
     public class TransactionDetailsViewModel: RoutableObservableBase
     {
         public Transaction Transaction { get; }
-        private static readonly RoutingService Router = RoutingService.GetInstance();
         
         private string _priceString = "";
         public string PriceString
@@ -66,17 +65,17 @@ namespace FinanceFuse.ViewModels.TransactionsViewModel
 
         public void BackToHome()
         {
-            Router.ChangeStaticScreen("TransactionSelectorViewModel", Transaction);
+            RoutingService.ChangeStaticScreen("TransactionSelectorViewModel", Transaction);
         }
         
         public void GoToCategory()
         {
-            if (!Router.CheckStaticScreenExist("CategoryPageViewModel"))
+            if (!RoutingService.CheckStaticScreenExist("CategoryPageViewModel"))
             {
                 RoutingService.ChangeScreen(new CategoryPageViewModel(), this);
                 return;
             }
-            Router.ChangeStaticScreen("CategoryPageViewModel", this);
+            RoutingService.ChangeStaticScreen("CategoryPageViewModel", this);
         }
 
         public void ParseExpression()

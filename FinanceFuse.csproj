@@ -38,6 +38,7 @@
 
 
     <ItemGroup>
+      <Folder Include="Assets\Categories\Income\" />
       <Folder Include="Assets\Transactions\" />
     </ItemGroup>
 </Project>

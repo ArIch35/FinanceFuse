@@ -5,27 +5,13 @@ using System.Linq;
 
 namespace FinanceFuse.Services
 {
-    public class TransactionService
+    public static class TransactionService
     {
-        private List<Transaction> Transactions { get; }
-        private static TransactionService _instance = null!;
-        private static readonly  object Locker = new();
+        private static List<Transaction> Transactions { get; }
 
-        private TransactionService()
+        static TransactionService()
         {
             Transactions = InitRandomData();
-        }
-        public static TransactionService GetInstance()
-        {
-            if (_instance != null!)
-                return _instance;
-
-            lock (Locker)
-            {
-                _instance ??= new TransactionService();
-            }
-
-            return _instance;
         }
 
         private static List<Transaction> InitRandomData()
@@ -41,7 +27,7 @@ namespace FinanceFuse.Services
             }).ToList();
         }
 
-        public SortedDictionary<int, SortedDictionary<DateTime, List<Transaction>>> GetTransactionsByMonthAndYear()
+        public static SortedDictionary<int, SortedDictionary<DateTime, List<Transaction>>> GetTransactionsByMonthAndYear()
         {
             return Transactions.Aggregate(new SortedDictionary<int, SortedDictionary<DateTime, List<Transaction>>>(), (acc, value) =>
             {

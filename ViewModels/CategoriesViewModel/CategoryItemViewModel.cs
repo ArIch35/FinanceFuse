@@ -10,7 +10,6 @@ public class CategoryItem(Category category, Action<Category> callback)
 {
     public Category Category { get; } = category;
     private Action<Category> CategoryChosenCallback { get; } = callback;
-
     public void CategoryClicked()
     {
         CategoryChosenCallback(Category);
@@ -25,9 +24,10 @@ public class CategoryItemViewModel: ObservableObject
     public CategoryItemViewModel(Category category, Action<Category> callback)
     {
         MainCategory = new CategoryItem(category, OnCategoryClicked);
-        SubCategories = category.SubCategories.Select(cat => new CategoryItem(cat, OnCategoryClicked)).ToList();
+        SubCategories = category.SubCategories?.Select(cat => new CategoryItem(cat, OnCategoryClicked)).ToList() ?? [];
         _categoryChosenCallback = callback;
     }
+    
     private static void OnCategoryClicked(Category category)
     {
         _categoryChosenCallback(category);
