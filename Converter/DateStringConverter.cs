@@ -8,31 +8,31 @@ public class DateStringConverter : IValueConverter
 {
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        if (value is DateTime dateTime)
+        if (!(value is DateTime dateTime))
         {
-            if (parameter is string format)
-            {
-                return dateTime.ToString(format, culture);
-            }
-            else
-            {
-                return dateTime.ToString("D", culture); 
-            }
+            return null;
         }
-
-        return null;
+        
+        if (parameter is string format)
+        {
+            return dateTime.ToString(format, culture);
+        }
+        
+        return dateTime.ToString("D", culture); 
     }
 
     public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        if (value is string dateStr)
+        if (!(value is string dateStr))
         {
-            if (DateTime.TryParse(dateStr, out var date))
-            {
-                return date;
-            }
+            return null;
         }
-
+        
+        if (DateTime.TryParse(dateStr, out var date))
+        {
+            return date;
+        }
+        
         return null;
     }
 }

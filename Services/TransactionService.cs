@@ -17,7 +17,7 @@ namespace FinanceFuse.Services
         }
         public static TransactionService GetInstance()
         {
-            if (_instance != null)
+            if (_instance != null!)
                 return _instance;
 
             lock (Locker)
@@ -37,6 +37,7 @@ namespace FinanceFuse.Services
                 Description = $"Details {o}",
                 Date = new DateTime(2000 + o%5, 1 + o%12, o < 25 ? o : o % 25 + 1),
                 Price = 1.3445 + o,
+                Category = CategoryService.NoCategory
             }).ToList();
         }
 

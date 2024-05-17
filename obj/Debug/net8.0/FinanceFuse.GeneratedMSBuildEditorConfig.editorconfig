@@ -20,6 +20,12 @@ build_property.EnableGeneratedComInterfaceComImportInterop =
 [C:/Users/rog/Documents/dotnet/project/FinanceFuse/App.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
+[C:/Users/rog/Documents/dotnet/project/FinanceFuse/Views/CategoriesView/CategoryItemView.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[C:/Users/rog/Documents/dotnet/project/FinanceFuse/Views/CategoriesView/CategoryPageView.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
 [C:/Users/rog/Documents/dotnet/project/FinanceFuse/Views/MainWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 

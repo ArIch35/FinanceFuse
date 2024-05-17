@@ -1,6 +1,7 @@
 ﻿using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using System;
+using System.IO;
 using System.Reflection;
 
 namespace FinanceFuse.Services
@@ -11,20 +12,24 @@ namespace FinanceFuse.Services
         private static readonly string DefaultLogo = $"avares://{AssemblyName}/Assets/avalonia-logo.ico";
         public static Bitmap ReadBitmapFromStringUri(string uri)
         {
-            return new Bitmap(AssetLoader.Open(CreateUri(uri)));
+            try
+            {
+                return new Bitmap(AssetLoader.Open(CreateUri(uri)));
+            }
+            catch (FileNotFoundException)
+            {
+                return new Bitmap(AssetLoader.Open(CreateUri(DefaultLogo)));
+            }
         }
 
         private static Uri CreateUri(string uri)
         {
-            if (Uri.TryCreate(uri, UriKind.RelativeOrAbsolute, out var result))
+            if (!(Uri.TryCreate(uri, UriKind.RelativeOrAbsolute, out var result)))
             {
-                if (!result.IsAbsoluteUri)
-                {
-                    return new Uri($"avares://{AssemblyName}/{uri}");
-                }
-                return result;
+                return new Uri(DefaultLogo);
             }
-            return new Uri(DefaultLogo);
+            
+            return !result.IsAbsoluteUri ? new Uri($"avares://{AssemblyName}/{uri}") : result;
         }
     }
 }

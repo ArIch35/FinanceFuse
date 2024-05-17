@@ -5,7 +5,6 @@ using FinanceFuse.Interfaces;
 using FinanceFuse.Models;
 
 namespace FinanceFuse.Services;
-
 public class RoutingService
 {
     private static Action<ObservableObject> _changeScreenCallback = null!;
@@ -20,7 +19,10 @@ public class RoutingService
 
     public static void SetMainCallback(Action<ObservableObject> callback)
     {
-        _changeScreenCallback ??= callback;
+        lock (Locker)
+        {
+            _changeScreenCallback ??= callback;
+        }
     }
     
     public static RoutingService GetInstance()
@@ -45,38 +47,43 @@ public class RoutingService
         _staticScreens.Add(screenName, screen);
     }
     
-    public static void ChangeScreen<TTarget>(TTarget newScreen) 
-        where TTarget: ObservableObject, IRoutable 
+    public static void ChangeScreen(RoutableObservableBase newScreen) 
     {
-        _changeScreenCallback(newScreen);
+        ChangeScreen(newScreen, default!, default!);
     }
-    public static void ChangeScreen<TTarget, TItem>(TTarget newScreen, TItem? item = default) 
-        where TTarget: RoutableObservableBase
-        where TItem: IModelBase
+    public static void ChangeScreen(RoutableObservableBase newScreen, RoutableObservableBase currentScreenRef)
     {
-        _changeScreenCallback(newScreen);
-        newScreen.OnRouted<TItem, TTarget>(item);
+        ChangeScreen(newScreen, default!, currentScreenRef);
     }
-    public static void ChangeScreen<TSource, TTarget, TItem>(TTarget newScreen, TItem? item = default, TSource? currentScreenRef = default) 
-        where TSource: RoutableObservableBase
-        where TTarget: RoutableObservableBase
-        where TItem: IModelBase
+    public static void ChangeScreen(RoutableObservableBase newScreen, IModelBase item)
+    {
+        ChangeScreen(newScreen, item ,default!);
+    }
+    private static void ChangeScreen(RoutableObservableBase newScreen, IModelBase? item, RoutableObservableBase? currentScreenRef) 
     {
         _changeScreenCallback(newScreen);
         newScreen.OnRouted(item, currentScreenRef);
     }
     
-    public void ChangeStaticScreen<TScreen, TItem>(string staticScreenName, TItem? item = default, TScreen? currentScreenRef = default) 
-        where TScreen: RoutableObservableBase
-        where TItem: IModelBase
+    public void ChangeStaticScreen(string staticScreenName, RoutableObservableBase currentScreenRef)
     {
-        if (_staticScreens.TryGetValue(staticScreenName, out var screen))
+        ChangeStaticScreen(staticScreenName, default!, currentScreenRef);
+    }
+    public void ChangeStaticScreen(string staticScreenName, IModelBase item)
+    {
+        ChangeStaticScreen(staticScreenName, item, default!);
+    }
+    private void ChangeStaticScreen(string staticScreenName, IModelBase? item, RoutableObservableBase? currentScreenRef) 
+    {
+        if (!(_staticScreens.TryGetValue(staticScreenName, out var screen)))
         {
-            _changeScreenCallback(screen);
-            if (screen is IRoutable routableScreen && item != null)
-            {
-                routableScreen.OnRouted(item, currentScreenRef);
-            }
+            return;
+        }
+        
+        _changeScreenCallback(screen);
+        if (screen is IRoutable routableScreen)
+        {
+            routableScreen.OnRouted(item, currentScreenRef);
         }
     }
 

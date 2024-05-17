@@ -11,21 +11,22 @@ namespace FinanceFuse.Models
 {
     public class Transaction: IModelBase
     {
-        public string Id { get; set; }
-        public string ImageUrl { get; set; }
-        public string Description { get; set; }
+        public string Id { get; init; } = null!;
+        public string ImageUrl { get; set; } = null!;
+        public string Description { get; set; } = null!;
         public DateTime Date { get; set; }
         public double Price { get; set; }
-        public Bitmap ImageSource
-        {
-            get => BitmapReader.ReadBitmapFromStringUri(ImageUrl);
-        }
+        public Bitmap ImageSource => BitmapReader.ReadBitmapFromStringUri(ImageUrl);
+        private Category _category = null!;
 
-        public Transaction()
+        public Category Category
         {
-            Id = "";
-            ImageUrl = "";
-            Description = "";
+            get => _category;
+            set
+            {
+                _category = value;
+                ImageUrl = value.LogoUrl!;
+            }
         }
     }
 }

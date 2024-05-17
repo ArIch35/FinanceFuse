@@ -1,0 +1,31 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:FinanceFuse.ViewModels.CategoriesViewModel"
+             xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
+             xmlns:behaviors="clr-namespace:FinanceFuse.Behaviors"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="FinanceFuse.Views.CategoriesView.CategoryItemView"
+             x:DataType="viewModels:CategoryItemViewModel">
+
+    <controls:Card MinWidth="240" VerticalAlignment="Top" HorizontalAlignment="Stretch"
+                   Margin="4">
+        <StackPanel>
+            <Grid Margin="10" ColumnDefinitions="Auto,*" behaviors:ClickableBehavior.Command="{Binding MainCategory.CategoryClicked}">
+                <Image Source="{Binding MainCategory.Category.LogoBitmap}" Grid.Column="0" Width="50" Height="50"/>
+                <TextBlock Text="{Binding MainCategory.Category.Name}" FontSize="22" Margin="10,0,0,0" Grid.Column="1"/>
+            </Grid>
+            <ListBox ItemsSource="{Binding SubCategories}" SelectionMode="Single" Margin="20 0 0 0">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="10" ColumnDefinitions="Auto,*" behaviors:ClickableBehavior.Command="{Binding CategoryClicked}">
+                            <Image Source="{Binding Category.LogoBitmap}" Grid.Column="0" Width="50" Height="50"/>
+                            <TextBlock Text="{Binding Category.Name}" FontSize="22" Margin="10,0,0,0" Grid.Column="1"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+    </controls:Card>
+</UserControl>

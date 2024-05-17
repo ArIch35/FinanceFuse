@@ -10,9 +10,9 @@ namespace FinanceFuse.ViewModels.TransactionsViewModel
     public class SelectorItem(int year, TransactionPageViewModel model)
     {
         public int YearHeader { get; set; } = year;
-        public TransactionPageViewModel TransactionPageModel { get; set; } = model;
+        public TransactionPageViewModel TransactionPageModel { get; } = model;
     }
-    public partial class TransactionSelectorViewModel: ObservableObject, IRoutable
+    public partial class TransactionSelectorViewModel: RoutableObservableBase
     {
         [ObservableProperty] private ObservableObject _mainContentViewModel;
         private readonly TransactionService _transactionService = TransactionService.GetInstance();
@@ -46,14 +46,15 @@ namespace FinanceFuse.ViewModels.TransactionsViewModel
                                 new TransactionItem(value)).ToList()))).ToList())))
                   .OrderBy(item => item.YearHeader)];
         }
-        
-        public void OnRouted<T>(T result) where T : IModelBase
+
+        public override void OnRouted(IModelBase? item = default, RoutableObservableBase? currentRef = default) 
         {
-            if (result is Transaction transaction)
+            if (!(item is Transaction transaction))
             {
-                SelectedItem = GroupedItemsByYear.First(item => item.YearHeader == transaction.Date.Year);
-                SelectedItem.TransactionPageModel.ChangeTab(transaction.Date.Month);
+                return;
             }
+            SelectedItem = GroupedItemsByYear.First(selected => selected.YearHeader == transaction.Date.Year);
+            SelectedItem.TransactionPageModel.ChangeTab(transaction.Date.Month);
         }
     }
 }
