@@ -21,9 +21,9 @@ namespace FinanceFuse.Services
                 Id = $"{o}",
                 ImageUrl = "Assets/avalonia-logo.ico",
                 Description = $"Details {o}",
-                Date = new DateTime(2000 + o%5, 1 + o%12, o < 25 ? o : o % 25 + 1),
+                Date = new DateTime(2023 + o%5, 1 + o%12, o < 25 ? o : o % 25 + 1),
                 Price = 1.3445 + o,
-                Category = CategoryService.NoCategory
+                Category = CategoryService.Categories[o % CategoryService.Categories.Count]
             }).ToList();
         }
 
@@ -50,6 +50,29 @@ namespace FinanceFuse.Services
                     {
                         { currentMonth, [value] }
                     });
+                }
+                return acc;
+            });
+        }
+
+        public static double GetTransactionSumOfMonth(DateTime month, CategoryType type)
+        {
+            return Transactions.Where(transaction =>
+                    transaction.Date.Month == month.Month && transaction.Date.Year == month.Year && transaction.Category.Type == type)
+                .Aggregate(0.0, (acc, transaction) => acc += transaction.Price);
+        }
+
+        public static double GetTransactionSumOfYear(int year)
+        {
+            return Transactions.Where(transaction => transaction.Date.Year == year).Aggregate(0.0, (acc, transaction) =>
+            {
+                if (transaction.Category.Type == CategoryType.Expense)
+                {
+                    acc -= transaction.Price;
+                }
+                else
+                {
+                    acc += transaction.Price;
                 }
                 return acc;
             });

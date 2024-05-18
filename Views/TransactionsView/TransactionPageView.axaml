@@ -4,36 +4,41 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              xmlns:viewModels="clr-namespace:FinanceFuse.ViewModels.TransactionsViewModel"
-			 xmlns:converter="clr-namespace:FinanceFuse.Converter"
+             xmlns:converter="clr-namespace:FinanceFuse.Converter"
+             xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
              x:Class="FinanceFuse.Views.TransactionsView.TransactionPageView"
              x:DataType="viewModels:TransactionPageViewModel">
 
-	<UserControl.Resources>
-		<converter:DateStringConverter x:Key="DateStringConverter" />
-	</UserControl.Resources>
+    <UserControl.Resources>
+        <converter:DateStringConverter x:Key="DateStringConverter" />
+    </UserControl.Resources>
 
-	<TabControl ItemsSource="{Binding TabItems}" SelectedItem="{Binding SelectedItem}">
-		<TabControl.Template>
-			<ControlTemplate TargetType="TabControl">
-				<StackPanel>
-					<ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" AllowAutoHide="True" Padding="6,0">
-						<ItemsPresenter Name="PART_ItemsPresenter" ItemsPanel="{TemplateBinding ItemsPanel}"/>
-					</ScrollViewer>
-					<ContentPresenter Name="PART_SelectedContentHost" Margin="{TemplateBinding Padding}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-									  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" Content="{TemplateBinding SelectedContent}" 
-									  ContentTemplate="{TemplateBinding SelectedContentTemplate}" />
-				</StackPanel>
-			</ControlTemplate>
-		</TabControl.Template>
-		<TabControl.ItemTemplate>
-			<DataTemplate>
-				<TextBlock Text="{Binding Header, Converter={StaticResource DateStringConverter}, ConverterParameter='MM/yyyy'}" Width="150"/>
-			</DataTemplate>
-		</TabControl.ItemTemplate>
-		<TabControl.ContentTemplate>
-			<DataTemplate x:DataType="viewModels:TabItem">
-				<ContentControl Content="{Binding TransactionModel}"/>
-			</DataTemplate>
-		</TabControl.ContentTemplate>
-	</TabControl>
+    <StackPanel Background="#FF222222">
+        <controls:Card Background="#FF333333" Padding="16">
+            <TabControl ItemsSource="{Binding TabItems}" SelectedItem="{Binding SelectedItem}" Background="#FF444444" Foreground="White">
+                <TabControl.Template>
+                    <ControlTemplate TargetType="TabControl">
+                        <StackPanel>
+                            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" AllowAutoHide="True" Padding="6,0">
+                                <ItemsPresenter Name="PART_ItemsPresenter" ItemsPanel="{TemplateBinding ItemsPanel}"/>
+                            </ScrollViewer>
+                            <ContentPresenter Name="PART_SelectedContentHost" Margin="{TemplateBinding Padding}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" Content="{TemplateBinding SelectedContent}" 
+                                              ContentTemplate="{TemplateBinding SelectedContentTemplate}" />
+                        </StackPanel>
+                    </ControlTemplate>
+                </TabControl.Template>
+                <TabControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Header, Converter={StaticResource DateStringConverter}, ConverterParameter='MM/yyyy'}" Width="150" Margin="4" Padding="8" Background="#FF555555" Foreground="White"/>
+                    </DataTemplate>
+                </TabControl.ItemTemplate>
+                <TabControl.ContentTemplate>
+                    <DataTemplate x:DataType="viewModels:TabItem">
+                        <ContentControl Content="{Binding TransactionModel}" Background="#FF444444" Foreground="White"/>
+                    </DataTemplate>
+                </TabControl.ContentTemplate>
+            </TabControl>
+        </controls:Card>
+    </StackPanel>
 </UserControl>

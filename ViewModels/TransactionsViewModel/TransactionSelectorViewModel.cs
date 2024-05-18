@@ -9,13 +9,14 @@ namespace FinanceFuse.ViewModels.TransactionsViewModel
 {
     public class SelectorItem(int year, TransactionPageViewModel model)
     {
-        public int YearHeader { get; set; } = year;
+        public int YearHeader { get; } = year;
         public TransactionPageViewModel TransactionPageModel { get; } = model;
     }
     public partial class TransactionSelectorViewModel: RoutableObservableBase
     {
-        [ObservableProperty] private ObservableObject _mainContentViewModel;
+        [ObservableProperty] private ObservableObject _mainContentViewModel = null!;
         public List<SelectorItem> GroupedItemsByYear => GenerateGroupedItemsByYear();
+        
         private SelectorItem _selectedItem;
         public SelectorItem SelectedItem
         {
@@ -24,16 +25,38 @@ namespace FinanceFuse.ViewModels.TransactionsViewModel
             {
                 _selectedItem = value;
                 SetProperty(ref _selectedItem, value);
-                MainContentViewModel = _selectedItem.TransactionPageModel;
+                SelectedItemUpdated();
             }
+        }
+
+        private double _totalYearValue;
+        public double TotalYearValue
+        {
+            get => _totalYearValue;
+            set => SetProperty(ref _totalYearValue, value);
+        }
+        
+        private string _totalYearDesc = null!;
+        public string TotalYearDesc
+        {
+            get => _totalYearDesc;
+            set => SetProperty(ref _totalYearDesc, $"Balance {value}");
         }
 
         public TransactionSelectorViewModel()
         {
             SelectedItem = _selectedItem = GroupedItemsByYear.FirstOrDefault()!;
-            MainContentViewModel = SelectedItem.TransactionPageModel;
+            SelectedItemUpdated();
             RoutingService.AddScreenToStaticScreen("TransactionSelectorViewModel", this);
         }
+
+        private void SelectedItemUpdated()
+        {
+            TotalYearDesc = SelectedItem.YearHeader.ToString();
+            TotalYearValue = TransactionService.GetTransactionSumOfYear(SelectedItem.YearHeader);
+            MainContentViewModel = SelectedItem.TransactionPageModel;
+        }
+        
         private static List<SelectorItem> GenerateGroupedItemsByYear()
         {
             return [.. TransactionService.GetTransactionsByMonthAndYear()
@@ -41,7 +64,8 @@ namespace FinanceFuse.ViewModels.TransactionsViewModel
                     new TransactionPageViewModel(outerPair.Value.Select(innerPair => 
                         new TabItem(innerPair.Key, 
                             new TransactionItemViewModel(innerPair.Value.Select(value => 
-                                new TransactionItem(value)).ToList()))).ToList())))
+                                new TransactionItem(value))
+                                .OrderBy(item => item.Transaction.Date).ToList()))).ToList())))
                   .OrderBy(item => item.YearHeader)];
         }
 

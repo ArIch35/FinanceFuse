@@ -3,23 +3,46 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-			 xmlns:viewModels="clr-namespace:FinanceFuse.ViewModels.TransactionsViewModel"
+             xmlns:viewModels="clr-namespace:FinanceFuse.ViewModels.TransactionsViewModel"
+             xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
+             xmlns:converter="clr-namespace:FinanceFuse.Converter"
              x:Class="FinanceFuse.Views.TransactionsView.TransactionSelectorView"
              x:DataType="viewModels:TransactionSelectorViewModel">
-	<Design.DataContext>
-		<viewModels:TransactionSelectorViewModel />
-	</Design.DataContext>
-	<StackPanel>
-		<ComboBox ItemsSource="{Binding GroupedItemsByYear}" 
-		          SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
-		          >
-			<ComboBox.ItemTemplate>
-				<DataTemplate>
-					<TextBlock Text="{Binding YearHeader}"/>
-				</DataTemplate>
-			</ComboBox.ItemTemplate>
-		</ComboBox>
-		<TextBlock Text="{Binding SelectedItem.YearHeader}"/>
-		<ContentControl Content="{Binding MainContentViewModel}"/>
-	</StackPanel>
+    <Design.DataContext>
+        <viewModels:TransactionSelectorViewModel />
+    </Design.DataContext>
+    <UserControl.Resources>
+        <converter:PriceConverter x:Key="PriceConverter" />
+    </UserControl.Resources>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="16" HorizontalAlignment="Center">
+            <controls:Card Background="#FF444444" Padding="8" Margin="20">
+                <Grid RowDefinitions="Auto,Auto,Auto">
+                    <Grid HorizontalAlignment="Center" Grid.Row="2">
+                        <ComboBox ItemsSource="{Binding GroupedItemsByYear}" 
+                                  SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                                  PlaceholderText="Choose a year"
+                                  Background="#FF333333"
+                                  Foreground="White"
+                                  BorderBrush="White"
+                                  Margin="8,0,0,0"
+                                  CornerRadius="5"
+                                  VerticalContentAlignment="Center">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <ItemsControl ItemsSource="{Binding YearHeader}" Height="0" Margin="15,0"/>
+                                        <TextBlock Text="{Binding YearHeader}" FontSize="22"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </Grid>
+                    <TextBlock Text="{Binding TotalYearDesc}" FontSize="22" Foreground="White" HorizontalAlignment="Center" Margin="0,8" Grid.Row="0"/>
+                    <TextBlock Text="{Binding TotalYearValue, Converter={StaticResource PriceConverter}}" FontSize="22" Foreground="White" HorizontalAlignment="Center" Margin="0,8" Grid.Row="1"/>
+                </Grid>
+            </controls:Card>
+            <ContentControl Content="{Binding MainContentViewModel}"/>
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>

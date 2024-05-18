@@ -4,29 +4,32 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:FinanceFuse.ViewModels.TransactionsViewModel"
              xmlns:behaviors="clr-namespace:FinanceFuse.Behaviors"
+             xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="FinanceFuse.Views.TransactionsView.TransactionDetailsView"
              x:DataType="viewModels:TransactionDetailsViewModel">
-    <Grid Margin="10" ColumnDefinitions="Auto,*">
-        <Button Command="{Binding BackToHome}" Grid.Column="0">Back</Button>
-        <StackPanel Grid.Column="1">
-            <StackPanel Orientation="Horizontal" Margin="20">
-                <Image Source="../../Assets/Transactions/description-icon.png" Width="50" Height="50" Margin="0 0 20 0"/>
-                <TextBox FontSize="22" Text="{Binding Transaction.Description, Mode=TwoWay}" Margin="5 0 0 0"/>
+    <controls:Card Margin="20">
+        <Grid Margin="10" RowDefinitions="Auto,Auto">
+            <StackPanel Grid.Row="0" Margin="20">
+                <Grid ColumnDefinitions="Auto,*">
+                    <Image Grid.Column="0" Source="../../Assets/Transactions/description-icon.png" Width="50" Height="50" VerticalAlignment="Center"/>
+                    <TextBox Grid.Column="1" FontSize="22" Text="{Binding Transaction.Description, Mode=TwoWay}" Margin="10 0"/>
+                </Grid>
+                <Grid Margin="0 20" ColumnDefinitions="Auto,*">
+                    <Image Grid.Column="0" Source="../../Assets/Transactions/money-icon.png" Width="50" Height="50" VerticalAlignment="Center"/>
+                    <TextBox Grid.Column="1" FontSize="22" Text="{Binding PriceString, Mode=TwoWay}" Margin="10 0"/>
+                </Grid>
+                <Grid Margin="0 20" ColumnDefinitions="Auto,*">
+                    <Image Grid.Column="0" Source="../../Assets/Transactions/date-icon.jpg" Width="50" Height="50" VerticalAlignment="Center"/>
+                    <DatePicker Grid.Column="1" SelectedDate="{Binding Date, Mode=TwoWay}" Margin="10 0"/>
+                </Grid>
+                <Grid Margin="0 20" ColumnDefinitions="Auto,*">
+                    <Image Grid.Column="0" Source="{Binding Category.LogoBitmap}" Width="50" Height="50" VerticalAlignment="Center"
+                           behaviors:ClickableBehavior.Command="{Binding GoToCategory}"/>
+                    <TextBlock Grid.Column="1" FontSize="22" Text="{Binding Category.Name}" Margin="10 0"/>
+                </Grid>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="20">
-                <Image Source="../../Assets/Transactions/money-icon.png" Width="50" Height="50" Margin="0 0 20 0"
-                       behaviors:ClickableBehavior.Command="{Binding ParseExpression}"/>
-                <TextBox FontSize="22" Text="{Binding PriceString, Mode=TwoWay}" Margin="5 0 0 0"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="20">
-                <Image Source="../../Assets/Transactions/date-icon.jpg" Width="50" Height="50" Margin="0 0 20 0"/>
-                <DatePicker SelectedDate="{Binding Date, Mode=TwoWay}"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="20" behaviors:ClickableBehavior.Command="{Binding GoToCategory}">
-                <Image Source="{Binding Category.LogoBitmap}" Width="50" Height="50" Margin="0 0 20 0"/>
-                <TextBlock FontSize="22" Text="{Binding Category.Name}" Margin="5 0 0 0"/>
-            </StackPanel>
-        </StackPanel>
-    </Grid>
+            <Button Command="{Binding BackToHome}" Grid.Row="1" VerticalAlignment="Center">Back</Button>
+        </Grid>
+    </controls:Card>
 </UserControl>

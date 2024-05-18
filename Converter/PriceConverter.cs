@@ -10,7 +10,7 @@ public class PriceConverter : IValueConverter
     {
         if (value is double price)
         {
-            return price.ToString("#.##", culture);
+            return price != 0 ? price.ToString("#.##", culture) : "0";
         }
 
         return null;
