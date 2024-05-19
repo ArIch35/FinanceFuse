@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System;
+using CommunityToolkit.Mvvm.ComponentModel;
 using FinanceFuse.Services;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,38 +15,19 @@ namespace FinanceFuse.ViewModels.TransactionsViewModel
     }
     public partial class TransactionSelectorViewModel: RoutableObservableBase
     {
-        [ObservableProperty] private ObservableObject _mainContentViewModel = null!;
-        public List<SelectorItem> GroupedItemsByYear => GenerateGroupedItemsByYear();
-        
-        private SelectorItem _selectedItem;
-        public SelectorItem SelectedItem
+        public static List<SelectorItem> GroupedItemsByYear => GenerateGroupedItemsByYear();
+        [ObservableProperty] private TransactionPageViewModel _transactionPageView = null!;
+        [ObservableProperty] private double _totalYearValue;
+        [ObservableProperty] private string _totalYearDesc = null!;
+        [ObservableProperty] private SelectorItem _selectedItem;
+        partial void OnSelectedItemChanged(SelectorItem value)
         {
-            get => _selectedItem;
-            set
-            {
-                _selectedItem = value;
-                SetProperty(ref _selectedItem, value);
-                SelectedItemUpdated();
-            }
-        }
-
-        private double _totalYearValue;
-        public double TotalYearValue
-        {
-            get => _totalYearValue;
-            set => SetProperty(ref _totalYearValue, value);
-        }
-        
-        private string _totalYearDesc = null!;
-        public string TotalYearDesc
-        {
-            get => _totalYearDesc;
-            set => SetProperty(ref _totalYearDesc, $"Balance {value}");
+            SelectedItemUpdated();
         }
 
         public TransactionSelectorViewModel()
         {
-            SelectedItem = _selectedItem = GroupedItemsByYear.FirstOrDefault()!;
+            SelectedItem = GroupedItemsByYear.Find(item => item.YearHeader == DateTime.Now.Year) ?? GroupedItemsByYear[0];
             SelectedItemUpdated();
             RoutingService.AddScreenToStaticScreen("TransactionSelectorViewModel", this);
         }
@@ -54,7 +36,7 @@ namespace FinanceFuse.ViewModels.TransactionsViewModel
         {
             TotalYearDesc = SelectedItem.YearHeader.ToString();
             TotalYearValue = TransactionService.GetTransactionSumOfYear(SelectedItem.YearHeader);
-            MainContentViewModel = SelectedItem.TransactionPageModel;
+            TransactionPageView = SelectedItem.TransactionPageModel;
         }
         
         private static List<SelectorItem> GenerateGroupedItemsByYear()
@@ -77,6 +59,16 @@ namespace FinanceFuse.ViewModels.TransactionsViewModel
             }
             SelectedItem = GroupedItemsByYear.First(selected => selected.YearHeader == transaction.Date.Year);
             SelectedItem.TransactionPageModel.ChangeTab(transaction.Date.Month);
+        }
+        
+        public void AddNewTransaction()
+        {
+            RoutingService.ChangeScreen(new TransactionDetailsViewModel(
+                new Transaction()
+                {
+                    Date = DateTime.Now,
+                    Category = CategoryService.NoCategory
+                }));
         }
     }
 }

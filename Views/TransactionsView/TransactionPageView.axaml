@@ -15,7 +15,7 @@
 
     <StackPanel Background="#FF222222">
         <controls:Card Background="#FF333333" Padding="16">
-            <TabControl ItemsSource="{Binding TabItems}" SelectedItem="{Binding SelectedItem}" Background="#FF444444" Foreground="White">
+            <TabControl ItemsSource="{Binding TabItems}" SelectedItem="{Binding SelectedTab}" Background="#FF444444" Foreground="White">
                 <TabControl.Template>
                     <ControlTemplate TargetType="TabControl">
                         <StackPanel>

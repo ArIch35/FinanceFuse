@@ -20,4 +20,9 @@ public class Category(string id, CategoryType type, string name, string? logoUrl
     public string? LogoUrl { get; } = logoUrl;
     public Bitmap? LogoBitmap => BitmapReader.ReadBitmapFromStringUri(LogoUrl!);
     public List<Category>? SubCategories { get; init; }
+
+    public bool IsEqual(Category comparator)
+    {
+        return Id.Equals(comparator.Id);
+    }
 }

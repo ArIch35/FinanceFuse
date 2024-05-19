@@ -10,20 +10,21 @@ namespace FinanceFuse.ViewModels.TransactionsViewModel
         public DateTime Header { get; set; } = header;
         public TransactionItemViewModel TransactionModel { get; set; } = model;
     }
-    public class TransactionPageViewModel(List<TabItem> items) : ObservableObject
+    
+    public partial class TransactionPageViewModel: ObservableObject
     {
-        public List<TabItem> TabItems { get; } = items;
-        
-        private TabItem _selectedItem = null!;
-        public TabItem SelectedItem
+        public List<TabItem> TabItems { get; }
+        [ObservableProperty] private TabItem _selectedTab = null!;
+
+        public TransactionPageViewModel(List<TabItem> tabItems)
         {
-            get => _selectedItem;
-            set => SetProperty(ref _selectedItem, value);
+            TabItems = tabItems;
+            SelectedTab = TabItems.Find(tab => tab.Header.Month == DateTime.Now.Month) ?? TabItems[0];
         }
         
         public void ChangeTab(int month)
         {
-            SelectedItem = TabItems.First(item => item.Header.Date.Month == month);
+            SelectedTab = TabItems.First(item => item.Header.Date.Month == month);
         }
     }
 }

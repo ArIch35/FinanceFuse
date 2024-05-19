@@ -11,7 +11,7 @@ namespace FinanceFuse.ViewModels.TransactionsViewModel
         public string Color { get; } = transaction.Category.Type == CategoryType.Expense ? "#d74045" : "#ffffff";
         public void OnTransactionClicked()
         {
-            RoutingService.ChangeScreen(new TransactionDetailsViewModel(Transaction));
+            RoutingService.ChangeScreen(new TransactionDetailsViewModel(Transaction), Transaction);
         }
     }
     public class TransactionItemViewModel: ObservableObject

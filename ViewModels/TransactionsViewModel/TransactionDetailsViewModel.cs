@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
+using CommunityToolkit.Mvvm.ComponentModel;
 using FinanceFuse.Interfaces;
 using FinanceFuse.Models;
 using FinanceFuse.Services;
@@ -10,10 +11,19 @@ using NCalc;
 
 namespace FinanceFuse.ViewModels.TransactionsViewModel
 {
-    public class TransactionDetailsViewModel: RoutableObservableBase
+    public partial class TransactionDetailsViewModel: RoutableObservableBase
     {
-        public Transaction Transaction { get; }
+        private Transaction Transaction { get; }
         
+        [ObservableProperty] private bool _isFormValid;
+
+        [ObservableProperty] private string _description = null!;
+        partial void OnDescriptionChanged(string value)
+        {
+            Transaction.Description = value;
+            IsFormValid = Validate(Transaction);
+        }
+
         private string _priceString = "";
         public string PriceString
         {
@@ -32,32 +42,25 @@ namespace FinanceFuse.ViewModels.TransactionsViewModel
                 SetProperty(ref _priceString, value);
             }
         }
-
-        private DateTimeOffset _date;
-        public DateTimeOffset Date
+        
+        [ObservableProperty] private DateTimeOffset _date;
+        partial void OnDateChanged(DateTimeOffset value)
         {
-            get => _date;
-            set
-            {
-                Transaction.Date = value.DateTime;
-                SetProperty(ref _date, value);
-            }
+            Transaction.Date = value.DateTime;
+            IsFormValid = Validate(Transaction);
         }
         
-        private Category _category = null!;
-        public Category Category
+        [ObservableProperty] private Category _category = null!;
+        partial void OnCategoryChanged(Category value)
         {
-            get => _category;
-            private set
-            {
-                Transaction.Category = value;
-                SetProperty(ref _category, value);
-            }
+            Transaction.Category = value;
+            IsFormValid = Validate(Transaction);
         }
 
         public TransactionDetailsViewModel(Transaction transaction)
         {
-            Transaction = transaction;
+            Transaction = transaction.Copy();
+            Description = transaction.Description;
             PriceString = transaction.Price.ToString(CultureInfo.CurrentCulture);
             Date = new DateTimeOffset(Transaction.Date);
             Category = transaction.Category;
@@ -85,6 +88,7 @@ namespace FinanceFuse.ViewModels.TransactionsViewModel
                 var expression = new Expression(PriceString);
                 PriceString = expression.Evaluate().ToString()!;
                 Transaction.Price = double.Parse(PriceString);
+                IsFormValid = Validate(Transaction);
             }
             catch (Exception ex) when (ex is EvaluationException || ex is ArgumentException)
             {
@@ -101,10 +105,42 @@ namespace FinanceFuse.ViewModels.TransactionsViewModel
 
         public override void OnRouted(IModelBase? item = default, RoutableObservableBase? currentRef = default) 
         {
+            if (item is Transaction transaction)
+            {
+                if (transaction.Id != null!)
+                {
+                    IsFormValid = true;
+                }
+            }
+            
             if (item is Category category)
             {
                 Category = category;
             }
+        }
+
+        public void SaveChanges()
+        {
+            var currentTransaction = TransactionService.GetTransactionById(Transaction.Id);
+            
+            if (currentTransaction == null)
+            {
+                TransactionService.AddNewTransaction(Transaction);
+                return;
+            }
+            
+            if (!currentTransaction.IsValueEqual(Transaction))
+            {
+                currentTransaction.Update(Transaction);
+            }
+        }
+
+        private static bool Validate(Transaction transaction)
+        {
+            return transaction.Description?.Trim().Length > 0 &&
+                   transaction.Price > 0 &&
+                   transaction.Date != null &&
+                   transaction.Category != null!;
         }
     }
 }

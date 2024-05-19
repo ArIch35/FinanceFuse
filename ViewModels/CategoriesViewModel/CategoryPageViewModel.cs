@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using CommunityToolkit.Mvvm.ComponentModel;
 using FinanceFuse.Interfaces;
 using FinanceFuse.Models;
 using FinanceFuse.Services;
@@ -12,17 +13,12 @@ public class CategoryTabItems(string header, List<CategoryItemViewModel> categor
     public List<CategoryItemViewModel> CategoryItems { get; init; } = categoryItems;
 }
 
-public class CategoryPageViewModel: RoutableObservableBase
+public partial class CategoryPageViewModel: RoutableObservableBase
 {
     private RoutableObservableBase _senderTransactionDetailRef = null!;
     public List<CategoryTabItems> CategoryTabItems { get; }
     
-    private CategoryTabItems _selectedItem = null!;
-    public CategoryTabItems SelectedItem
-    {
-        get => _selectedItem;
-        set => SetProperty(ref _selectedItem, value);
-    }
+    [ObservableProperty] private CategoryTabItems _selectedItem = null!;
 
     public CategoryPageViewModel()
     {

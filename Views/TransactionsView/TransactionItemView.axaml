@@ -40,7 +40,7 @@
                                        Margin="8" Padding="16" Background="#FF444444" MaxHeight="180" 
                                        behaviors:ClickableBehavior.Command="{Binding OnTransactionClicked}">
                             <Grid ColumnDefinitions="30*,50*,20*">
-                                <Image Source="{Binding Transaction.ImageSource}" Grid.Column="0" Margin="8"/>
+                                <Image Source="{Binding Transaction.Category.LogoBitmap}" Grid.Column="0" Margin="8"/>
                                 <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="16,0,0,0">
                                     <TextBlock Text="{Binding Transaction.Description}" FontSize="18" Margin="0,0,0,10" Foreground="White"/>
                                     <TextBlock Text="{Binding Transaction.Date, Converter={StaticResource DateStringConverter}}" FontSize="18" Foreground="#FFAAAAAA"/>

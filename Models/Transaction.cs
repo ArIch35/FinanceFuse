@@ -12,21 +12,35 @@ namespace FinanceFuse.Models
     public class Transaction: IModelBase
     {
         public string Id { get; init; } = null!;
-        public string ImageUrl { get; set; } = null!;
         public string Description { get; set; } = null!;
         public DateTime Date { get; set; }
         public double Price { get; set; }
-        public Bitmap ImageSource => BitmapReader.ReadBitmapFromStringUri(ImageUrl);
-        private Category _category = null!;
+        public Category Category { get; set; } = null!;
 
-        public Category Category
+        public Transaction Copy()
         {
-            get => _category;
-            set
+            return new Transaction()
             {
-                _category = value;
-                ImageUrl = value.LogoUrl!;
-            }
+                Id = Id,
+                Description = Description,
+                Date = Date,
+                Price = Price,
+                Category = Category
+            };
+        }
+
+        public bool IsValueEqual(Transaction comparator)
+        {
+            return Description.Equals(comparator.Description) && Date.Equals(comparator.Date)
+                   && Price.Equals(comparator.Price) && Category.IsEqual(comparator.Category);
+        }
+
+        public void Update(Transaction newTransaction)
+        {
+            Description = newTransaction.Description;
+            Date = newTransaction.Date;
+            Price = newTransaction.Price;
+            Category = newTransaction.Category;
         }
     }
 }

@@ -14,7 +14,8 @@
     <UserControl.Resources>
         <converter:PriceConverter x:Key="PriceConverter" />
     </UserControl.Resources>
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
+    <Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel Margin="16" HorizontalAlignment="Center">
             <controls:Card Background="#FF444444" Padding="8" Margin="20">
                 <Grid RowDefinitions="Auto,Auto,Auto">
@@ -38,11 +39,15 @@
                             </ComboBox.ItemTemplate>
                         </ComboBox>
                     </Grid>
-                    <TextBlock Text="{Binding TotalYearDesc}" FontSize="22" Foreground="White" HorizontalAlignment="Center" Margin="0,8" Grid.Row="0"/>
+                    <TextBlock Text="{Binding TotalYearDesc, StringFormat='Year {0}'}" FontSize="22" Foreground="White" HorizontalAlignment="Center" Margin="0,8" Grid.Row="0"/>
                     <TextBlock Text="{Binding TotalYearValue, Converter={StaticResource PriceConverter}}" FontSize="22" Foreground="White" HorizontalAlignment="Center" Margin="0,8" Grid.Row="1"/>
                 </Grid>
             </controls:Card>
-            <ContentControl Content="{Binding MainContentViewModel}"/>
+            <ContentControl Content="{Binding TransactionPageView}"/>
         </StackPanel>
     </ScrollViewer>
+    <Button Content="+" Width="56" Height="56" Background="#FF6200EE" Foreground="White"
+        HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="16"
+        CornerRadius="28" Command="{Binding AddNewTransaction}"/>
+    </Grid>
 </UserControl>

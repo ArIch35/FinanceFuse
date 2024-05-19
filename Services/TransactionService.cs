@@ -19,7 +19,6 @@ namespace FinanceFuse.Services
             return Enumerable.Range(1, 72).Select(o => new Transaction()
             {
                 Id = $"{o}",
-                ImageUrl = "Assets/avalonia-logo.ico",
                 Description = $"Details {o}",
                 Date = new DateTime(2023 + o%5, 1 + o%12, o < 25 ? o : o % 25 + 1),
                 Price = 1.3445 + o,
@@ -76,6 +75,16 @@ namespace FinanceFuse.Services
                 }
                 return acc;
             });
+        }
+
+        public static Transaction? GetTransactionById(string id)
+        {
+            return Transactions.Find(transaction => transaction.Id == id);
+        }
+
+        public static void AddNewTransaction(Transaction transaction)
+        {
+            Transactions.Add(transaction);
         }
     }
 }
