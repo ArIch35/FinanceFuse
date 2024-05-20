@@ -5,9 +5,11 @@ using FinanceFuse.Services;
 
 namespace FinanceFuse.ViewModels.TransactionsViewModel
 {
-    public class TransactionItem(Transaction transaction): ObservableObject
+    public class TransactionItem(Transaction transaction, List<TransactionItem>? groupedTransaction = default): ObservableObject
     {
         public Transaction Transaction { get; } = transaction;
+        public List<TransactionItem> GroupedTransaction { get; } = groupedTransaction!;
+        public string GroupCount => $"{GroupedTransaction.Count} Transactions";
         public string Color { get; } = transaction.Category.Type == CategoryType.Expense ? "#d74045" : "#ffffff";
         public void OnTransactionClicked()
         {

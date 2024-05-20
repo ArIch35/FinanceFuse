@@ -16,8 +16,7 @@
         
         <DataTemplate x:Key="ItemsTemplate" DataType="viewModels:TransactionSelectorViewModel">
             <Grid>
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <StackPanel Margin="16" HorizontalAlignment="Center">
+                <StackPanel Margin="16" HorizontalAlignment="Center">
                         <controls:Card Background="#FF444444" Padding="8" Margin="20">
                             <Grid RowDefinitions="Auto,Auto,Auto">
                                 <Grid HorizontalAlignment="Center" Grid.Row="2">
@@ -46,7 +45,6 @@
                         </controls:Card>
                         <ContentControl Content="{Binding TransactionPageView}"/>
                     </StackPanel>
-                </ScrollViewer>
             </Grid>
         </DataTemplate>
         

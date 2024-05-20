@@ -48,9 +48,18 @@ namespace FinanceFuse.ViewModels.TransactionsViewModel
                 .Select(outerPair => new SelectorItem(outerPair.Key, 
                     new TransactionPageViewModel(outerPair.Value.Select(innerPair => 
                         new TabItem(innerPair.Key, 
-                            new TransactionItemViewModel(innerPair.Value.Select(value => 
-                                new TransactionItem(value))
-                                .OrderBy(item => item.Transaction.Date).ToList()))).ToList())))
+                            new TransactionItemViewModel(
+                                innerPair.Value.GroupBy(value => value.Category.Id)
+                                    .Select(group => new TransactionItem(
+                                        new Transaction()
+                                        {
+                                            Id = "-1",
+                                            Category = group.First().Category,
+                                            Description = group.First().Category.Name,
+                                            Date = group.OrderByDescending(trans => trans.Date).First().Date,
+                                            Price = group.Aggregate(0.0, (acc, transaction) => acc += transaction.Price)
+                                        }, group.Select(transaction => new TransactionItem(transaction)).ToList()))
+                                        .OrderByDescending(item => item.Transaction.Date).ToList()))).ToList())))
                   .OrderBy(item => item.YearHeader)];
         }
 
