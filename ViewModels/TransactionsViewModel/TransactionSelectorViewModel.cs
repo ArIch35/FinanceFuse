@@ -23,12 +23,16 @@ namespace FinanceFuse.ViewModels.TransactionsViewModel
         [ObservableProperty] private SelectorItem _selectedItem = null!;
         partial void OnSelectedItemChanged(SelectorItem value)
         {
-            SelectedItemUpdated();
+            if (value != null!)
+            {
+                TotalYearDesc = value.YearHeader.ToString();
+                TotalYearValue = TransactionService.GetTransactionSumOfYear(value.YearHeader);
+                TransactionPageView = value.TransactionPageModel;
+            }
         }
 
         public TransactionSelectorViewModel()
         {
-            RoutingService.AddScreenToStaticScreen("TransactionSelectorViewModel", this);
             GroupedItemsByYear = GenerateGroupedItemsByYear();
             HasItems = GroupedItemsByYear.Count > 0;
             if (!HasItems)
@@ -36,14 +40,6 @@ namespace FinanceFuse.ViewModels.TransactionsViewModel
                 return;
             }
             SelectedItem = GroupedItemsByYear.Find(item => item.YearHeader == DateTime.Now.Year) ?? GroupedItemsByYear[0];
-            SelectedItemUpdated();
-        }
-
-        private void SelectedItemUpdated()
-        {
-            TotalYearDesc = SelectedItem.YearHeader.ToString();
-            TotalYearValue = TransactionService.GetTransactionSumOfYear(SelectedItem.YearHeader);
-            TransactionPageView = SelectedItem.TransactionPageModel;
         }
         
         private static List<SelectorItem> GenerateGroupedItemsByYear()
@@ -68,8 +64,7 @@ namespace FinanceFuse.ViewModels.TransactionsViewModel
             GroupedItemsByYear = GenerateGroupedItemsByYear();
             HasItems = GroupedItemsByYear.Count > 0;
             SelectedItem = GroupedItemsByYear.First(selected => selected.YearHeader == transaction.Date.Year);
-            SelectedItem.TransactionPageModel.ChangeTab(transaction.Date.Month);
-            SelectedItemUpdated();
+            SelectedItem?.TransactionPageModel.ChangeTab(transaction.Date.Month);
         }
         
         public void AddNewTransaction()

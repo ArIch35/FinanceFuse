@@ -17,12 +17,12 @@ namespace FinanceFuse.Services
 
         private static List<Transaction> InitRandomData()
         {
-            return [];
+            //return [];
             return Enumerable.Range(1, 72).Select(o => new Transaction()
             {
                 Id = $"{o}",
                 Description = $"Details {o}",
-                Date = new DateTime(2023 + o%5, 1 + o%12, o < 25 ? o : o % 25 + 1),
+                Date = new DateTime(2023 + o%2, 1 + o%12, o < 25 ? o : o % 25 + 1),
                 Price = 1.3445 + o,
                 Category = CategoryService.Categories[o % CategoryService.Categories.Count]
             }).ToList();
