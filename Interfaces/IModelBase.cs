@@ -2,5 +2,5 @@ namespace FinanceFuse.Interfaces;
 
 public interface IModelBase
 {
-    public string Id { get; init; }
+    public string Id { get; set; }
 }

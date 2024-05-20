@@ -13,7 +13,7 @@
         <converter:DateStringConverter x:Key="DateStringConverter" />
     </UserControl.Resources>
 
-    <StackPanel Background="#FF222222">
+    <DockPanel Background="#FF222222">
         <controls:Card Background="#FF333333" Padding="16">
             <TabControl ItemsSource="{Binding TabItems}" SelectedItem="{Binding SelectedTab}" Background="#FF444444" Foreground="White">
                 <TabControl.Template>
@@ -40,5 +40,5 @@
                 </TabControl.ContentTemplate>
             </TabControl>
         </controls:Card>
-    </StackPanel>
+    </DockPanel>
 </UserControl>

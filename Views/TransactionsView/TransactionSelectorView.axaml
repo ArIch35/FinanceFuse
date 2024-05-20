@@ -13,41 +13,55 @@
     </Design.DataContext>
     <UserControl.Resources>
         <converter:PriceConverter x:Key="PriceConverter" />
+        
+        <DataTemplate x:Key="ItemsTemplate" DataType="viewModels:TransactionSelectorViewModel">
+            <Grid>
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel Margin="16" HorizontalAlignment="Center">
+                        <controls:Card Background="#FF444444" Padding="8" Margin="20">
+                            <Grid RowDefinitions="Auto,Auto,Auto">
+                                <Grid HorizontalAlignment="Center" Grid.Row="2">
+                                    <ComboBox ItemsSource="{Binding GroupedItemsByYear}" 
+                                              SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                                              PlaceholderText="Choose a year"
+                                              Background="#FF333333"
+                                              Foreground="White"
+                                              BorderBrush="White"
+                                              Margin="8,0,0,0"
+                                              CornerRadius="5"
+                                              VerticalContentAlignment="Center">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel>
+                                                    <ItemsControl ItemsSource="{Binding YearHeader}" Height="0" Margin="15,0"/>
+                                                    <TextBlock Text="{Binding YearHeader}" FontSize="22"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
+                                </Grid>
+                                <TextBlock Text="{Binding TotalYearDesc, StringFormat='Year {0}'}" FontSize="22" Foreground="White" HorizontalAlignment="Center" Margin="0,8" Grid.Row="0"/>
+                                <TextBlock Text="{Binding TotalYearValue, Converter={StaticResource PriceConverter}}" FontSize="22" Foreground="White" HorizontalAlignment="Center" Margin="0,8" Grid.Row="1"/>
+                            </Grid>
+                        </controls:Card>
+                        <ContentControl Content="{Binding TransactionPageView}"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+        </DataTemplate>
+        
+        <DataTemplate x:Key="NoItemsTemplate">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="No transactions available" FontSize="22" Foreground="White" HorizontalAlignment="Center" Margin="0,8"/>
+            </StackPanel>
+        </DataTemplate>
     </UserControl.Resources>
+    
     <Grid>
-        <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <StackPanel Margin="16" HorizontalAlignment="Center">
-            <controls:Card Background="#FF444444" Padding="8" Margin="20">
-                <Grid RowDefinitions="Auto,Auto,Auto">
-                    <Grid HorizontalAlignment="Center" Grid.Row="2">
-                        <ComboBox ItemsSource="{Binding GroupedItemsByYear}" 
-                                  SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
-                                  PlaceholderText="Choose a year"
-                                  Background="#FF333333"
-                                  Foreground="White"
-                                  BorderBrush="White"
-                                  Margin="8,0,0,0"
-                                  CornerRadius="5"
-                                  VerticalContentAlignment="Center">
-                            <ComboBox.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel>
-                                        <ItemsControl ItemsSource="{Binding YearHeader}" Height="0" Margin="15,0"/>
-                                        <TextBlock Text="{Binding YearHeader}" FontSize="22"/>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ComboBox.ItemTemplate>
-                        </ComboBox>
-                    </Grid>
-                    <TextBlock Text="{Binding TotalYearDesc, StringFormat='Year {0}'}" FontSize="22" Foreground="White" HorizontalAlignment="Center" Margin="0,8" Grid.Row="0"/>
-                    <TextBlock Text="{Binding TotalYearValue, Converter={StaticResource PriceConverter}}" FontSize="22" Foreground="White" HorizontalAlignment="Center" Margin="0,8" Grid.Row="1"/>
-                </Grid>
-            </controls:Card>
-            <ContentControl Content="{Binding TransactionPageView}"/>
-        </StackPanel>
-    </ScrollViewer>
-    <Button Content="+" Width="56" Height="56" Background="#FF6200EE" Foreground="White"
-        HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="16"
-        CornerRadius="28" Command="{Binding AddNewTransaction}"/>
+        <ContentControl Content="{Binding}" ContentTemplate="{DynamicResource ItemsTemplate}" IsVisible="{Binding HasItems}"/>
+        <ContentControl ContentTemplate="{DynamicResource NoItemsTemplate}" IsVisible="{Binding !HasItems}"/>
+        <Button Content="+" Width="56" Height="56" Background="#FF6200EE" Foreground="White"
+                HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="16"
+                CornerRadius="28" Command="{Binding AddNewTransaction}"/>
     </Grid>
 </UserControl>

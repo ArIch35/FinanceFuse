@@ -15,11 +15,12 @@ namespace FinanceFuse.ViewModels.TransactionsViewModel
     }
     public partial class TransactionSelectorViewModel: RoutableObservableBase
     {
-        public static List<SelectorItem> GroupedItemsByYear => GenerateGroupedItemsByYear();
+        [ObservableProperty] private bool _hasItems;
+        public List<SelectorItem> GroupedItemsByYear { get; set; }
         [ObservableProperty] private TransactionPageViewModel _transactionPageView = null!;
         [ObservableProperty] private double _totalYearValue;
         [ObservableProperty] private string _totalYearDesc = null!;
-        [ObservableProperty] private SelectorItem _selectedItem;
+        [ObservableProperty] private SelectorItem _selectedItem = null!;
         partial void OnSelectedItemChanged(SelectorItem value)
         {
             SelectedItemUpdated();
@@ -27,9 +28,15 @@ namespace FinanceFuse.ViewModels.TransactionsViewModel
 
         public TransactionSelectorViewModel()
         {
+            RoutingService.AddScreenToStaticScreen("TransactionSelectorViewModel", this);
+            GroupedItemsByYear = GenerateGroupedItemsByYear();
+            HasItems = GroupedItemsByYear.Count > 0;
+            if (!HasItems)
+            {
+                return;
+            }
             SelectedItem = GroupedItemsByYear.Find(item => item.YearHeader == DateTime.Now.Year) ?? GroupedItemsByYear[0];
             SelectedItemUpdated();
-            RoutingService.AddScreenToStaticScreen("TransactionSelectorViewModel", this);
         }
 
         private void SelectedItemUpdated()
@@ -57,8 +64,12 @@ namespace FinanceFuse.ViewModels.TransactionsViewModel
             {
                 return;
             }
+
+            GroupedItemsByYear = GenerateGroupedItemsByYear();
+            HasItems = GroupedItemsByYear.Count > 0;
             SelectedItem = GroupedItemsByYear.First(selected => selected.YearHeader == transaction.Date.Year);
             SelectedItem.TransactionPageModel.ChangeTab(transaction.Date.Month);
+            SelectedItemUpdated();
         }
         
         public void AddNewTransaction()

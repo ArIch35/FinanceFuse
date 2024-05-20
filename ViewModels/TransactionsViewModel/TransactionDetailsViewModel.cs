@@ -140,7 +140,7 @@ namespace FinanceFuse.ViewModels.TransactionsViewModel
             return transaction.Description?.Trim().Length > 0 &&
                    transaction.Price > 0 &&
                    transaction.Date != null &&
-                   transaction.Category != null!;
+                   !transaction.Category.Id.Equals("0");
         }
     }
 }

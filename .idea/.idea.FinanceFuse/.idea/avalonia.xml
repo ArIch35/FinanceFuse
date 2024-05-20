@@ -11,6 +11,7 @@
         <entry key="Views/TransactionsView/TransactionItemView.axaml" value="FinanceFuse.csproj" />
         <entry key="Views/TransactionsView/TransactionPageView.axaml" value="FinanceFuse.csproj" />
         <entry key="Views/TransactionsView/TransactionSelectorView.axaml" value="FinanceFuse.csproj" />
+        <entry key="Views/TransactionsView/TransactionTemplateSelector.axaml" value="FinanceFuse.csproj" />
       </map>
     </option>
   </component>

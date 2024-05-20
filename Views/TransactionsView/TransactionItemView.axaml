@@ -17,7 +17,7 @@
         <converter:PriceConverter x:Key="PriceConverter" />
     </UserControl.Resources>
     <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <StackPanel Margin="16">
+        <StackPanel Margin="16" MinWidth="1200">
             <controls:Card MinWidth="240" VerticalAlignment="Top" HorizontalAlignment="Stretch"
                            Margin="8" Padding="16" Background="#FF444444">
                 <Grid ColumnDefinitions="80*,20*">

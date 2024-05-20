@@ -14,7 +14,7 @@ public enum CategoryType
 
 public class Category(string id, CategoryType type, string name, string? logoUrl = null): IModelBase
 {
-    public string Id { get; init; } = id;
+    public string Id { get; set; } = id;
     public CategoryType Type { get; init; } = type;
     public string Name { get; init; } = name;
     public string? LogoUrl { get; } = logoUrl;

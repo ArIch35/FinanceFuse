@@ -11,7 +11,7 @@ namespace FinanceFuse.Models
 {
     public class Transaction: IModelBase
     {
-        public string Id { get; init; } = null!;
+        public string Id { get; set; } = null!;
         public string Description { get; set; } = null!;
         public DateTime Date { get; set; }
         public double Price { get; set; }

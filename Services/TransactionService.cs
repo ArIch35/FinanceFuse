@@ -8,6 +8,7 @@ namespace FinanceFuse.Services
     public static class TransactionService
     {
         private static List<Transaction> Transactions { get; }
+        private static int ctr = 0;
 
         static TransactionService()
         {
@@ -16,6 +17,7 @@ namespace FinanceFuse.Services
 
         private static List<Transaction> InitRandomData()
         {
+            return [];
             return Enumerable.Range(1, 72).Select(o => new Transaction()
             {
                 Id = $"{o}",
@@ -84,7 +86,14 @@ namespace FinanceFuse.Services
 
         public static void AddNewTransaction(Transaction transaction)
         {
+            transaction.Id = GenerateRandomId();
             Transactions.Add(transaction);
+        }
+
+        private static string GenerateRandomId()
+        {
+            ctr += 1;
+            return $"id-{ctr}";
         }
     }
 }
