@@ -6,6 +6,7 @@
         <entry key="Views/CategoriesView/CategoryItemView.axaml" value="FinanceFuse.csproj" />
         <entry key="Views/CategoriesView/CategoryItemsView.axaml" value="FinanceFuse.csproj" />
         <entry key="Views/CategoriesView/CategoryPageView.axaml" value="FinanceFuse.csproj" />
+        <entry key="Views/HomePageView.axaml" value="FinanceFuse.csproj" />
         <entry key="Views/MainWindow.axaml" value="FinanceFuse.csproj" />
         <entry key="Views/TransactionsView/TransactionDetailsView.axaml" value="FinanceFuse.csproj" />
         <entry key="Views/TransactionsView/TransactionItemView.axaml" value="FinanceFuse.csproj" />

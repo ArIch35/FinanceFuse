@@ -73,11 +73,6 @@ namespace FinanceFuse.ViewModels.TransactionsViewModel
         
         public void GoToCategory()
         {
-            if (!RoutingService.CheckStaticScreenExist("CategoryPageViewModel"))
-            {
-                RoutingService.ChangeScreen(new CategoryPageViewModel(), this);
-                return;
-            }
             RoutingService.ChangeStaticScreen("CategoryPageViewModel", this);
         }
 

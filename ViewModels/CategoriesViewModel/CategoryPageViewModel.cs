@@ -23,7 +23,6 @@ public partial class CategoryPageViewModel: RoutableObservableBase
     public CategoryPageViewModel()
     {
         CategoryTabItems = GetCategoryItemViewModels();
-        RoutingService.AddScreenToStaticScreen("CategoryPageViewModel", this);
     }
 
     private List<CategoryTabItems> GetCategoryItemViewModels()

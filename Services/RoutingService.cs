@@ -24,28 +24,12 @@ public static class RoutingService
         }
     }
 
-    public static void AddScreenToStaticScreen<T>(string screenName, T screen) where T : RoutableObservableBase
+    public static void AddScreenToStaticScreen(string screenName, RoutableObservableBase screen)
     {
-        if (StaticScreens.TryAdd(screenName, screen))
-        {
-            return;
-        }
-        StaticScreens.Add(screenName, screen);
+        StaticScreens.TryAdd(screenName, screen);
     }
     
-    public static void ChangeScreen(RoutableObservableBase newScreen) 
-    {
-        ChangeScreen(newScreen, default!, default!);
-    }
-    public static void ChangeScreen(RoutableObservableBase newScreen, RoutableObservableBase currentScreenRef)
-    {
-        ChangeScreen(newScreen, default!, currentScreenRef);
-    }
-    public static void ChangeScreen(RoutableObservableBase newScreen, IModelBase item)
-    {
-        ChangeScreen(newScreen, item ,default!);
-    }
-    private static void ChangeScreen(RoutableObservableBase newScreen, IModelBase? item, RoutableObservableBase? currentScreenRef) 
+    public static void ChangeScreen(RoutableObservableBase newScreen, IModelBase? item = default, RoutableObservableBase? currentScreenRef = default) 
     {
         _changeScreenCallback(newScreen);
         newScreen.OnRouted(item, currentScreenRef);
@@ -55,11 +39,7 @@ public static class RoutingService
     {
         ChangeStaticScreen(staticScreenName, default!, currentScreenRef);
     }
-    public static void ChangeStaticScreen(string staticScreenName, IModelBase item)
-    {
-        ChangeStaticScreen(staticScreenName, item, default!);
-    }
-    private static void ChangeStaticScreen(string staticScreenName, IModelBase? item, RoutableObservableBase? currentScreenRef) 
+    public static void ChangeStaticScreen(string staticScreenName, IModelBase? item = default, RoutableObservableBase? currentScreenRef = default) 
     {
         if (!(StaticScreens.TryGetValue(staticScreenName, out var screen)))
         {
@@ -71,10 +51,5 @@ public static class RoutingService
         {
             routableScreen.OnRouted(item, currentScreenRef);
         }
-    }
-
-    public static bool CheckStaticScreenExist(string name)
-    {
-        return StaticScreens.ContainsKey(name);
     }
 }
