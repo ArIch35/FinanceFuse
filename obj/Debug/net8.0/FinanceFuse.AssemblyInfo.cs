@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FinanceFuse")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9d115c4903db1f03c6946c12610f61743333be78")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8a03c25406d1dd557f4dfc7140bca6ab0d69b90a")]
 [assembly: System.Reflection.AssemblyProductAttribute("FinanceFuse")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FinanceFuse")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

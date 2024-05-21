@@ -6,11 +6,15 @@
              xmlns:viewModels="clr-namespace:FinanceFuse.ViewModels.TransactionsViewModel"
              xmlns:converter="clr-namespace:FinanceFuse.Converter"
              xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
+             xmlns:local="clr-namespace:FinanceFuse.Views.TransactionsView"
              x:Class="FinanceFuse.Views.TransactionsView.TransactionPageView"
              x:DataType="viewModels:TransactionPageViewModel">
 
     <UserControl.Resources>
         <converter:DateStringConverter x:Key="DateStringConverter" />
+        <DataTemplate x:Key="TransactionItemGroupViewTemplate" DataType="{x:Type viewModels:TransactionItemGroupViewModel}">
+            <local:TransactionItemGroupView />
+        </DataTemplate>
     </UserControl.Resources>
 
     <DockPanel Background="#FF222222">
@@ -35,7 +39,7 @@
                 </TabControl.ItemTemplate>
                 <TabControl.ContentTemplate>
                     <DataTemplate x:DataType="viewModels:TabItem">
-                        <ContentControl Content="{Binding TransactionModel}" Background="#FF444444" Foreground="White"/>
+                        <ContentControl Content="{Binding TransactionItemGroupView}" ContentTemplate="{StaticResource TransactionItemGroupViewTemplate}" />
                     </DataTemplate>
                 </TabControl.ContentTemplate>
             </TabControl>

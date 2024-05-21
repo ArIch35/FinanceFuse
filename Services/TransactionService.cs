@@ -95,5 +95,11 @@ namespace FinanceFuse.Services
             ctr += 1;
             return $"id-{ctr}";
         }
+
+        public static IEnumerable<Transaction> GetRecentTransactions()
+        {
+            return Transactions.Where(transaction => transaction.Date <= DateTime.Now)
+                .OrderByDescending(transaction => transaction.Date).Take(3);
+        }
     }
 }

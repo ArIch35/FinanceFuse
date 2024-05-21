@@ -16,56 +16,19 @@
         <converter:DateStringConverter x:Key="DateStringConverter" />
         <converter:PriceConverter x:Key="PriceConverter" />
     </UserControl.Resources>
-    <StackPanel Margin="16" MinWidth="1200">
-            <controls:Card MinWidth="240" VerticalAlignment="Top" HorizontalAlignment="Stretch"
-                           Margin="8" Padding="16" Background="#FF444444">
-                <Grid ColumnDefinitions="80*,20*">
-                    <StackPanel Grid.Column="0">
-                        <TextBlock Text="Income" FontSize="22" Margin="0,0,0,8" Foreground="White"/>
-                        <TextBlock Text="Expenses" FontSize="22" Margin="0,0,0,8" Foreground="White"/>
-                        <TextBlock Text="Total" FontSize="22" Foreground="White"/>
+    <ListBox ItemsSource="{Binding Transactions}" SelectionMode="Single" Margin="8,0,8,8" Background="#FF333333">
+        <ListBox.ItemTemplate>
+            <DataTemplate>
+                <Grid ColumnDefinitions="30*,50*,20*" behaviors:ClickableBehavior.Command="{Binding OnTransactionClicked}" MaxHeight="180" Margin="20 0 0 0">
+                    <Image Source="{Binding Transaction.Category.LogoBitmap}" Grid.Column="0" Margin="8"/>
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="16,0,0,0">
+                        <TextBlock Text="{Binding Transaction.Description}" FontSize="18" Margin="0,0,0,10" Foreground="White"/>
+                        <TextBlock Text="{Binding Transaction.Date, Converter={StaticResource DateStringConverter}}" FontSize="18" Foreground="#FFAAAAAA"/>
                     </StackPanel>
-                    <StackPanel Grid.Column="1" HorizontalAlignment="Right">
-                        <TextBlock Text="{Binding Income, Converter={StaticResource PriceConverter}}" FontSize="22" HorizontalAlignment="Right" Margin="0,0,0,8" Foreground="White"/>
-                        <TextBlock Text="{Binding Expenses, Converter={StaticResource PriceConverter}}" FontSize="22" HorizontalAlignment="Right" Margin="0,0,0,8" Foreground="#d74045"/>
-                        <TextBlock Text="{Binding Total, Converter={StaticResource PriceConverter}}" FontSize="22" HorizontalAlignment="Right" Foreground="{Binding TotalColor}"/>
-                    </StackPanel>
+                    <TextBlock Text="{Binding Transaction.Price, Converter={StaticResource PriceConverter}}" 
+                               Grid.Column="2" VerticalAlignment="Center" FontSize="18" HorizontalAlignment="Right" Margin="8" Foreground="{Binding Color}"/>
                 </Grid>
-            </controls:Card>
-            <ListBox ItemsSource="{Binding Transactions}" SelectionMode="Single" Margin="8,0,8,8" Background="#FF333333">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <controls:Card MinWidth="240" VerticalAlignment="Top" HorizontalAlignment="Stretch"
-                                       Margin="8" Padding="16" Background="#FF444444">
-                            <StackPanel>
-                                <Grid ColumnDefinitions="30*,50*,20*" MaxHeight="180">
-                                    <Image Source="{Binding Transaction.Category.LogoBitmap}" Grid.Column="0" Margin="8"/>
-                                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="16,0,0,0">
-                                        <TextBlock Text="{Binding Transaction.Description}" FontSize="18" Margin="0,0,0,10" Foreground="White"/>
-                                        <TextBlock Text="{Binding GroupCount}" FontSize="18" Foreground="#FFAAAAAA"/>
-                                    </StackPanel>
-                                    <TextBlock Text="{Binding Transaction.Price, Converter={StaticResource PriceConverter}}" 
-                                               Grid.Column="2" VerticalAlignment="Center" FontSize="18" HorizontalAlignment="Right" Margin="8" Foreground="{Binding Color}"/>
-                                </Grid>
-                                <ListBox ItemsSource="{Binding GroupedTransaction}" SelectionMode="Single" Margin="8,0,8,8" Background="#FF333333">
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <Grid ColumnDefinitions="30*,50*,20*" behaviors:ClickableBehavior.Command="{Binding OnTransactionClicked}" MaxHeight="180" Margin="20 0 0 0">
-                                                <Image Source="{Binding Transaction.Category.LogoBitmap}" Grid.Column="0" Margin="8"/>
-                                                <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="16,0,0,0">
-                                                    <TextBlock Text="{Binding Transaction.Description}" FontSize="18" Margin="0,0,0,10" Foreground="White"/>
-                                                    <TextBlock Text="{Binding Transaction.Date, Converter={StaticResource DateStringConverter}}" FontSize="18" Foreground="#FFAAAAAA"/>
-                                                </StackPanel>
-                                                <TextBlock Text="{Binding Transaction.Price, Converter={StaticResource PriceConverter}}" 
-                                                           Grid.Column="2" VerticalAlignment="Center" FontSize="18" HorizontalAlignment="Right" Margin="8" Foreground="{Binding Color}"/>
-                                            </Grid>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
-                            </StackPanel>
-                        </controls:Card>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </StackPanel>
+            </DataTemplate>
+        </ListBox.ItemTemplate>
+    </ListBox>
 </UserControl>

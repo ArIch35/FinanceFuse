@@ -21,18 +21,18 @@ public partial class MainWindowViewModel : ObservableObject
 
     private static void InitStaticScreen()
     {
-        RoutingService.AddScreenToStaticScreen("HomePageViewModel", new HomePageViewModel());
-        RoutingService.AddScreenToStaticScreen("TransactionSelectorViewModel", new TransactionSelectorViewModel());
-        RoutingService.AddScreenToStaticScreen("CategoryPageViewModel", new CategoryPageViewModel());
+        RoutingService.AddScreenToStaticScreen(nameof(HomePageViewModel), new HomePageViewModel());
+        RoutingService.AddScreenToStaticScreen(nameof(TransactionSelectorViewModel), new TransactionSelectorViewModel());
+        RoutingService.AddScreenToStaticScreen(nameof(CategoryPageViewModel), new CategoryPageViewModel());
     }
 
     public void OnHomePageClicked()
     {
-        RoutingService.ChangeStaticScreen("HomePageViewModel");
+        RoutingService.ChangeStaticScreen(nameof(HomePageViewModel));
     }
     
     public void OnTransactionPageClicked()
     {
-        RoutingService.ChangeStaticScreen("TransactionSelectorViewModel");
+        RoutingService.ChangeStaticScreen(nameof(TransactionSelectorViewModel));
     }
 }

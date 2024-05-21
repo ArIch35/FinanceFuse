@@ -35,6 +35,9 @@ build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 [C:/Users/rog/Documents/dotnet/project/FinanceFuse/Views/TransactionsView/TransactionDetailsView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
+[C:/Users/rog/Documents/dotnet/project/FinanceFuse/Views/TransactionsView/TransactionItemGroupView.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
 [C:/Users/rog/Documents/dotnet/project/FinanceFuse/Views/TransactionsView/TransactionItemView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 

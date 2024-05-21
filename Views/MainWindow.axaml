@@ -17,10 +17,6 @@
         <vm:MainWindowViewModel />
     </Design.DataContext>
 	<ScrollViewer>
-        <StackPanel>
-            <TextBlock Text="test" behaviors:ClickableBehavior.Command="{Binding OnHomePageClicked}"></TextBlock>
-            <TextBlock Text="test2" behaviors:ClickableBehavior.Command="{Binding OnTransactionPageClicked}"></TextBlock>
-            <ContentControl Content="{Binding MainContentViewModel}" />
-        </StackPanel>
+        <ContentControl Content="{Binding MainContentViewModel}" />
     </ScrollViewer>
 </Window>

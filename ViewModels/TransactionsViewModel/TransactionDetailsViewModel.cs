@@ -16,14 +16,12 @@ namespace FinanceFuse.ViewModels.TransactionsViewModel
         private Transaction Transaction { get; }
         
         [ObservableProperty] private bool _isFormValid;
-
         [ObservableProperty] private string _description = null!;
         partial void OnDescriptionChanged(string value)
         {
             Transaction.Description = value;
             IsFormValid = Validate(Transaction);
         }
-
         private string _priceString = "";
         public string PriceString
         {
@@ -57,6 +55,8 @@ namespace FinanceFuse.ViewModels.TransactionsViewModel
             IsFormValid = Validate(Transaction);
         }
 
+        private string _prevStaticScreenRefId = "TransactionSelectorViewModel";
+
         public TransactionDetailsViewModel(Transaction transaction)
         {
             Transaction = transaction.Copy();
@@ -68,12 +68,12 @@ namespace FinanceFuse.ViewModels.TransactionsViewModel
 
         public void BackToHome()
         {
-            RoutingService.ChangeStaticScreen("TransactionSelectorViewModel", Transaction);
+            RoutingService.ChangeStaticScreen(_prevStaticScreenRefId, Transaction);
         }
         
         public void GoToCategory()
         {
-            RoutingService.ChangeStaticScreen("CategoryPageViewModel", this);
+            RoutingService.ChangeStaticScreen(nameof(CategoryPageViewModel), this);
         }
 
         public void ParseExpression()
@@ -111,6 +111,18 @@ namespace FinanceFuse.ViewModels.TransactionsViewModel
             if (item is Category category)
             {
                 Category = category;
+            }
+
+            if (currentRef != null)
+            {
+                if (currentRef is HomePageViewModel)
+                {
+                    _prevStaticScreenRefId = nameof(HomePageViewModel);
+                }
+                else
+                {
+                    _prevStaticScreenRefId = nameof(TransactionSelectorViewModel);
+                }
             }
         }
 

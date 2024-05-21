@@ -1,41 +1,23 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using FinanceFuse.Models;
 using FinanceFuse.Services;
 
 namespace FinanceFuse.ViewModels.TransactionsViewModel
 {
-    public class TransactionItem(Transaction transaction, List<TransactionItem>? groupedTransaction = default): ObservableObject
+    public class TransactionItem(Transaction transaction, RoutableObservableBase? staticParentRef): ObservableObject
     {
         public Transaction Transaction { get; } = transaction;
-        public List<TransactionItem> GroupedTransaction { get; } = groupedTransaction!;
-        public string GroupCount => $"{GroupedTransaction.Count} Transactions";
         public string Color { get; } = transaction.Category.Type == CategoryType.Expense ? "#d74045" : "#ffffff";
         public void OnTransactionClicked()
         {
-            RoutingService.ChangeScreen(new TransactionDetailsViewModel(Transaction), Transaction);
+            RoutingService.ChangeScreen(new TransactionDetailsViewModel(Transaction), Transaction, staticParentRef);
         }
     }
-    public class TransactionItemViewModel: ObservableObject
+    public class TransactionItemViewModel(IEnumerable<Transaction> transactions, RoutableObservableBase? staticParentRef = default): ObservableObject
     {
-        public List<TransactionItem> Transactions { get; }
-        public double Income { get; }
-        public double Expenses { get; } 
-        public double Total { get; }
-        public string TotalColor { get; } = null!;
-        
-        public TransactionItemViewModel(List<TransactionItem> transactions)
-        {
-            Transactions = transactions;
-            if (transactions.Count < 0) 
-            {
-                return;
-            }
-            Income = TransactionService.GetTransactionSumOfMonth(transactions[0].Transaction.Date, CategoryType.Income);
-            Expenses = TransactionService.GetTransactionSumOfMonth(transactions[0].Transaction.Date, CategoryType.Expense);
-            Total = Income - Expenses;
-            TotalColor = Total < 0 ? "#d74045" : "#ffffff";
-        }
+        public IEnumerable<TransactionItem> Transactions { get; set; } = transactions.Select(transaction => new TransactionItem(transaction, staticParentRef));
     }
 }
 

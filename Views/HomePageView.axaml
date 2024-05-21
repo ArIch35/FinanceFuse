@@ -3,8 +3,23 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:FinanceFuse.ViewModels"
+             xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
+             xmlns:behaviors="clr-namespace:FinanceFuse.Behaviors"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="FinanceFuse.Views.HomePageView"
              x:DataType="viewModels:HomePageViewModel">
-    Home Page!
+
+    <StackPanel Margin="16" Spacing="16">
+        <controls:Card MinWidth="240" VerticalAlignment="Top" HorizontalAlignment="Stretch"
+                       Padding="16" Background="#FF444444">
+            <StackPanel>
+                <Grid ColumnDefinitions="*,Auto">
+                    <TextBlock Text="Recent Transactions" FontSize="22" FontWeight="Bold" Foreground="White" Grid.Column="0" HorizontalAlignment="Left"/>
+                    <TextBlock Text="See All Transactions" FontSize="22" FontWeight="Bold" Foreground="#FF69B4" Grid.Column="1" HorizontalAlignment="Right"
+                               behaviors:ClickableBehavior.Command="{Binding ToTransactionSelector}"/>
+                </Grid>
+                <ContentControl Content="{Binding RecentTransactions}" Margin="8,16,0,0"/>
+            </StackPanel>
+        </controls:Card>
+    </StackPanel>
 </UserControl>
