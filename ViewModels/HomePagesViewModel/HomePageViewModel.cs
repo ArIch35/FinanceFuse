@@ -3,16 +3,17 @@ using FinanceFuse.Interfaces;
 using FinanceFuse.Models;
 using FinanceFuse.Services;
 using FinanceFuse.ViewModels.TransactionsViewModel;
-
-namespace FinanceFuse.ViewModels;
+namespace FinanceFuse.ViewModels.HomePagesViewModel;
 
 public class HomePageViewModel: RoutableObservableBase
 {
     public TransactionItemViewModel RecentTransactions { get; }
+    public TopSpendingViewModel TopSpending { get; }
 
     public HomePageViewModel()
     {
-        RecentTransactions = new(TransactionService.GetRecentTransactions(), this);
+        RecentTransactions = new TransactionItemViewModel(TransactionService.GetRecentTransactions(), this);
+        TopSpending = new TopSpendingViewModel(TransactionService.GetTopSpendingForThisMonth());
     }
 
     public void ToTransactionSelector()
@@ -24,5 +25,6 @@ public class HomePageViewModel: RoutableObservableBase
     {
         RecentTransactions.Transactions = TransactionService.GetRecentTransactions()
             .Select(transaction => new TransactionItem(transaction, this));
+        TopSpending.CategorySums = TransactionService.GetTopSpendingForThisMonth();
     }
 }

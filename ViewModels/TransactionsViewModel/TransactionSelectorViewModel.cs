@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FinanceFuse.Interfaces;
 using FinanceFuse.Models;
+using FinanceFuse.ViewModels.HomePagesViewModel;
 
 namespace FinanceFuse.ViewModels.TransactionsViewModel
 {

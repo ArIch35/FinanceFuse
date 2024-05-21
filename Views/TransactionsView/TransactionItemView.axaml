@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:FinanceFuse.ViewModels.TransactionsViewModel"
              xmlns:converter="clr-namespace:FinanceFuse.Converter"
-             xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
              xmlns:behaviors="clr-namespace:FinanceFuse.Behaviors"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="FinanceFuse.Views.TransactionsView.TransactionItemView"

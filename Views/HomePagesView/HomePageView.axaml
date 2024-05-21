@@ -2,14 +2,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:viewModels="clr-namespace:FinanceFuse.ViewModels"
+             xmlns:viewModels="clr-namespace:FinanceFuse.ViewModels.HomePagesViewModel"
              xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
              xmlns:behaviors="clr-namespace:FinanceFuse.Behaviors"
+             xmlns:local="clr-namespace:FinanceFuse.Views.HomePagesView"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="FinanceFuse.Views.HomePageView"
+             x:Class="FinanceFuse.Views.HomePagesView.HomePageView"
              x:DataType="viewModels:HomePageViewModel">
-
+    <UserControl.Resources>
+        <DataTemplate x:Key="TopSpendingViewTemplate" DataType="{x:Type viewModels:TopSpendingViewModel}">
+            <local:TopSpendingView />
+        </DataTemplate>
+    </UserControl.Resources>
     <StackPanel Margin="16" Spacing="16">
+        <ContentControl Content="{Binding TopSpending}" ContentTemplate="{StaticResource TopSpendingViewTemplate}" Margin="8,16,0,0"/>
         <controls:Card MinWidth="240" VerticalAlignment="Top" HorizontalAlignment="Stretch"
                        Padding="16" Background="#FF444444">
             <StackPanel>
@@ -22,4 +28,5 @@
             </StackPanel>
         </controls:Card>
     </StackPanel>
+    
 </UserControl>

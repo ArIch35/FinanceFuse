@@ -34,6 +34,10 @@
       <Compile Update="Views\TransactionsView\TransactionItemView.axaml.cs">
         <DependentUpon>TransactionItemView.axaml</DependentUpon>
       </Compile>
+      <Compile Update="Views\HomePagesView\HomePageView.axaml.cs">
+        <DependentUpon>HomePageView.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
     </ItemGroup>
 
 

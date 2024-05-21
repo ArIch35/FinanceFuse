@@ -7,6 +7,7 @@ using FinanceFuse.Interfaces;
 using FinanceFuse.Models;
 using FinanceFuse.Services;
 using FinanceFuse.ViewModels.CategoriesViewModel;
+using FinanceFuse.ViewModels.HomePagesViewModel;
 using NCalc;
 
 namespace FinanceFuse.ViewModels.TransactionsViewModel
@@ -115,14 +116,7 @@ namespace FinanceFuse.ViewModels.TransactionsViewModel
 
             if (currentRef != null)
             {
-                if (currentRef is HomePageViewModel)
-                {
-                    _prevStaticScreenRefId = nameof(HomePageViewModel);
-                }
-                else
-                {
-                    _prevStaticScreenRefId = nameof(TransactionSelectorViewModel);
-                }
+                _prevStaticScreenRefId = currentRef is HomePageViewModel ? nameof(HomePageViewModel) : nameof(TransactionSelectorViewModel);
             }
         }
 
@@ -146,7 +140,6 @@ namespace FinanceFuse.ViewModels.TransactionsViewModel
         {
             return transaction.Description?.Trim().Length > 0 &&
                    transaction.Price > 0 &&
-                   transaction.Date != null &&
                    !transaction.Category.Id.Equals("0");
         }
     }

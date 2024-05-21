@@ -20,7 +20,7 @@ public static class RoutingService
     {
         lock (Locker)
         {
-            _changeScreenCallback ??= callback;
+            _changeScreenCallback = callback;
         }
     }
 

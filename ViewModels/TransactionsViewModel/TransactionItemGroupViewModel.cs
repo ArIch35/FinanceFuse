@@ -27,7 +27,7 @@ public class TransactionItemGroupViewModel
                 Id = "-1",
                 Category = group.First().Category,
                 Description = group.First().Category.Name,
-                Date = group.OrderByDescending(trans => trans.Date).First().Date,
+                Date = group.OrderByDescending(transaction => transaction.Date).First().Date,
                 Price = group.Sum(transaction => transaction.Price)
             }, group)).ToList();
         

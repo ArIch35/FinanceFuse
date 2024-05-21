@@ -17,7 +17,7 @@ public class Category(string id, CategoryType type, string name, string? logoUrl
     public string Id { get; set; } = id;
     public CategoryType Type { get; init; } = type;
     public string Name { get; init; } = name;
-    public string? LogoUrl { get; } = logoUrl;
+    private string? LogoUrl { get; } = logoUrl;
     public Bitmap? LogoBitmap => BitmapReader.ReadBitmapFromStringUri(LogoUrl!);
     public List<Category>? SubCategories { get; init; }
 
